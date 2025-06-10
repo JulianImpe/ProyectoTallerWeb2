@@ -22,3 +22,16 @@ model Usuario {
   contrasena String
   direccion  String
 }
+
+model Producto {
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  descripcion   String
+  clasificacion String
+  precio        Float
+  stock         Int
+  imagen        String
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

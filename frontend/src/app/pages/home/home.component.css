@@ -1,0 +1,192 @@
+
+h1,
+h2,
+h3 {
+    font-family: "Kaushan Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1 {
+    font-size: 3rem;
+    padding: 1rem;
+}
+h2{
+    font-size: 2.5rem;;
+}
+p, a, button {
+    font-family: "Karantina", sans-serif;
+    font-weight: 100;
+    font-style: light;
+}
+
+.header-container {
+    color: white;
+    position: relative;
+    width: 100%;
+    height: 100vh;/* Ajusta este valor según lo que quieras */
+    overflow: hidden;
+
+}
+.header-container a{
+    text-decoration: none;
+        color: white;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.7rem;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav ul li {
+    list-style: none;
+    margin: 0 1rem;
+}
+
+#imagen_hero {
+    position: absolute;
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+#texto-hero{
+    position:absolute;
+    top:60%;
+    left:80%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color:white;
+    gap: 1rem;
+}
+#texto-hero h2{
+    font-size: 3.2rem;
+}
+#texto-hero p{
+    font-size: 2.2rem;
+}
+#texto-hero button{
+    background-color:rgba(255, 255, 255, 0.086);
+    border: 3px solid white;
+    border-color: rgba(255, 255, 255, 0.463);
+    color:white;
+    padding: 1rem;
+    margin-top:1rem;
+    width: 100%;
+    font-size: 2rem;
+}
+
+#texto-hero button:hover{
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;;
+}
+#productos-mas-vendidos{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+        text-align: center;
+}
+.productos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+#productos-mas-vendidos h2{
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color:white;
+}
+.producto img{
+        object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+.producto{
+        width: 100%;
+    height: 100%;/* Ajusta este valor según lo que quieras */
+    overflow: hidden;
+    padding: 1rem;
+}
+.producto button{
+    background-color: #4D1E0A;
+    color: white;
+    border-radius: 15px;
+    padding: 0.7rem;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.producto button:hover{
+        transform: scale(1.1);
+    transition: all 0.2s ease-in-out;;
+}
+.precio{
+        background-color: #EDBC53;
+    color: #4D1E0A;
+    font-weight: light;
+    border-radius: 15px;
+    padding: 0.5rem;
+    border: none;
+    font-size: 1.2rem;    
+}
+.producto-info{
+    display: flex;
+    
+    flex-direction: row;
+
+}
+#quienes_somos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.quienes_somos-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;  
+}
+.quienes_somos-container p{
+    font-family: "Kaushan Script", cursive;
+    font-size: 2rem;
+    padding: 1rem;
+    background-color: #EDBC53;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#img-cafeteria{
+    max-width: 35%;
+    max-height: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 1rem;
+}
+#quienes_somos button{
+    background-color:rgba(255, 255, 255, 0.086);
+    border: 3px solid rgb(0, 0, 0);
+    border-color: rgba(5, 5, 5, 0.463);
+    color:rgb(0, 0, 0);
+    padding: 1rem;
+    margin: 1rem;
+    width: 30%;
+    font-size: 2rem;
+}

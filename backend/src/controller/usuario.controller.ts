@@ -5,11 +5,14 @@ import UsuarioDTO from "../dtos/usuario.dto";
 export class UsuarioController {
   constructor(private usuarioService: UsuarioService) {}
 
-  public crearUsuario = async (req: Request, res: Response): Promise<void> => {
+  public crearUsuario = async (req: Request, res: Response) => {
     try {
       const { nombre, apellido, email, contraseña, direccion } = req.body;
 
-      if(!nombre || !apellido || !email || !contraseña || !direccion) res.status(400).json({ error: "Todos los campos son obligatorios" });
+      if (!nombre || !apellido || !email || !contraseña || !direccion) {
+        res.status(400).json({ error: "Todos los campos son obligatorios" });
+        return;
+      }
 
       const usuario: UsuarioDTO = {
         nombre,
@@ -27,10 +30,7 @@ export class UsuarioController {
     }
   };
 
-  public obtenerUsuarios = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
+  public obtenerUsuarios = async (req: Request, res: Response) => {
     try {
       const users = await this.usuarioService.obtenerUsuarios();
       res.status(200).json(users);
@@ -40,13 +40,13 @@ export class UsuarioController {
     }
   };
 
-  public obtenerUsuarioPorEmail = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
+  public obtenerUsuarioPorEmail = async (req: Request, res: Response) => {
     try {
       const { email } = req.body;
-      if(!email) res.status(400).json({ error: "Email es obligatorio" });
+      if (!email) {
+        res.status(400).json({ error: "Email es obligatorio" });
+        return;
+      }
 
       const user = await this.usuarioService.obtenerUsuarioPorEmail(email);
 
@@ -61,8 +61,10 @@ export class UsuarioController {
   public iniciarSesion = async (req: Request, res: Response) => {
     try {
       const { email, contraseña } = req.body;
-      if (!email || !contraseña)
+      if (!email || !contraseña) {
         res.status(400).json({ error: "Email y contraseña son obligatorios" });
+        return;
+      }
 
       const user = await this.usuarioService.iniciarSesion(email, contraseña);
 
@@ -77,8 +79,10 @@ export class UsuarioController {
   public actualizarContraseña = async (req: Request, res: Response) => {
     try {
       const { email, nuevaContraseña } = req.body;
-      if (!email || !nuevaContraseña)
+      if (!email || !nuevaContraseña) {
         res.status(400).json({ error: "Email y contraseña son obligatorios" });
+        return;
+      }
 
       const user = await this.usuarioService.actualizarContraseña(
         email,

@@ -19,6 +19,19 @@ export class ProductoController {
     try {
       const { nombre, descripcion, precio, stock, imagen, clasificacion } =
         req.body;
+
+      if (
+        !nombre ||
+        !descripcion ||
+        !precio ||
+        !stock ||
+        !imagen ||
+        !clasificacion
+      ) {
+        res.status(400).json({ error: "Todos los campos son obligatorios" });
+        return;
+      }
+
       const producto: ProductoDTO = {
         nombre,
         descripcion,
@@ -39,6 +52,11 @@ export class ProductoController {
   public obtenerProductoPorId = async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
+
+      if (isNaN(id)) {
+        return res.status(400).json({ error: "ID inválido" });
+      }
+
       const producto = await this.productoService.obtenerProductoPorId(id);
       if (!producto) {
         return res.status(404).json({ error: "Producto no encontrado" });

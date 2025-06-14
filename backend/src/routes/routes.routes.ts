@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { usuarioRouter } from "./usuario/usuario.routes";
-import { productoRouter } from "./usuario/producto.routes";
+import { productoRouter } from "./producto/producto.routes";
 
 export class AppRoutes{
 

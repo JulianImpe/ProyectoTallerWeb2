@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UsuarioService } from "./../services/usuario.service";
-import { Usuario } from "../../generated/prisma";
 import UsuarioDTO from "../dtos/usuario.dto";
 
 export class UsuarioController {

@@ -1,0 +1,11 @@
+<h1>Productos</h1>
+<div class="productos">
+    <ul class="lista-productos">
+        @for (producto of productos; track producto.id) {
+        <div class="producto">
+            <img [src]="producto.imagen" alt="">
+            <li>{{producto.nombre}}(Precio: {{producto.precio}})</li>
+        </div>
+        }
+    </ul>
+</div>

@@ -3,11 +3,13 @@ import { ProductoService } from '../../services/producto/producto.service';
 import { Producto } from '../models/producto';
 import { TipoProducto } from '../../../enums/app.enums';
 import { CurrencyPipe } from '@angular/common';
+import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from "../header/header.component";
 
 
 @Component({
   selector: 'app-productos',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, FooterComponent, HeaderComponent],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })

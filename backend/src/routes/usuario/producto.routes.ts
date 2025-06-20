@@ -9,3 +9,4 @@ const productoController = new ProductoController(productoService);
 
 productoRouter.get('/', productoController.obtenerProductos.bind(productoController));
 productoRouter.post('/', productoController.crearProducto.bind(productoController));
+productoRouter.get('/tipo/:tipoProducto', productoController.obtenerProductosPorTipoProducto.bind(productoController));

@@ -1,3 +1,5 @@
+import { TipoProducto } from "../../generated/prisma";
+
 export interface ProductoDTO {
     nombre: string;
     precio: number;
@@ -5,4 +7,5 @@ export interface ProductoDTO {
     descripcion: string;
     imagen: string;
     clasificacion: string;
+    tipoProducto: TipoProducto;
 }

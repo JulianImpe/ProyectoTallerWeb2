@@ -1,4 +1,11 @@
+<!--app-header-->
+<h1>------Header acá-----</h1>
 <h1>Productos</h1>
+<div class="tipoProductos">
+    @for (tipoProducto of tipoProductos; track $index) {
+<button (onclick)="obtenerProductosPorTipoProducto(tipoProducto)"> {{tipoProducto}}</button>    
+}
+</div>
 <div class="productos">
     <ul class="lista-productos">
         @for (producto of productos; track producto.id) {
@@ -9,3 +16,4 @@
         }
     </ul>
 </div>
+

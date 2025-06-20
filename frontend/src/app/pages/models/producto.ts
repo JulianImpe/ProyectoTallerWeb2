@@ -1,3 +1,5 @@
+import { TipoProducto } from "../../../enums/app.enums";
+
 export interface Producto {
     id: number;
     nombre: string;
@@ -6,4 +8,5 @@ export interface Producto {
     stock : number;
     imagen: string;
     clasificacion: string;
+    tipoProducto: TipoProducto;
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from '../../pages/models/producto';
+import { TipoProducto } from '../../../enums/app.enums';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ obtenerProductos(): Observable<Producto[]>{
   //Hacemos una petición GET al servidor para obtener la lista de productos
   // y devolvemos un Observable que emitirá un array de productos
   return this.http.get<Producto[]>(this.apiUrl);
+}
+
+obtenerProductosPorTipoProducto(tipoProducto: TipoProducto): Observable<Producto[]> {
+  return this.http.get<Producto[]>(`${this.apiUrl}/tipo/${tipoProducto}`);
 }
 }

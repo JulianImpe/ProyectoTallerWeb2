@@ -1,5 +1,7 @@
 import { PrismaClient, Producto } from "../../generated/prisma";
 import { ProductoDTO } from "../dtos/producto.dto";
+import { TipoProducto } from "../../generated/prisma";//Nos traemos el tipo de producto desde prisma, ya que es un enum generado por Prisma.
+
 
 export class ProductoService {
   private prisma = new PrismaClient();
@@ -14,24 +16,43 @@ export class ProductoService {
     }
   }
 
-    public async crearProducto(producto: ProductoDTO): Promise<Producto> {
-        try {
-        const newProduct = await this.prisma.producto.create({
-            data: {
-            nombre: producto.nombre,
-            descripcion: producto.descripcion,
-            precio: producto.precio,
-            stock: producto.stock,
-            imagen: producto.imagen,
-            clasificacion: producto.clasificacion,
-            },
-        });
-        return newProduct;
-        } catch (error) {
-        console.error("Error creating product:", error);
-        throw new Error("Internal server error");
-        }
+  public async crearProducto(producto: ProductoDTO): Promise<Producto> {
+    try {
+      const newProduct = await this.prisma.producto.create({
+        data: {
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precio: producto.precio,
+          stock: producto.stock,
+          imagen: producto.imagen,
+          clasificacion: producto.clasificacion,
+          tipoProducto: producto.tipoProducto, // Assuming tipoProducto is part of ProductoDTO
+          // Assuming tipoProducto is part of ProductoDTO
+        },
+      });
+      return newProduct;
+    } catch (error) {
+      console.error("Error creating product:", error);
+      throw new Error("Internal server error");
     }
+  }
 
-    
+
+  public async obtenerProductosPorTipoProducto(tipoProducto: TipoProducto): Promise<Producto[]> {
+    try {
+      const listaProductosPorTipo = await this.prisma.producto.findMany({
+        where: {
+          tipoProducto: {
+            equals: tipoProducto
+          }
+        }
+      });
+      return listaProductosPorTipo;
+    } catch (error) {
+      console.error("Error fetching products by type:", error);
+      throw new Error("Internal server error");
+    }
+  }
 }
+
+

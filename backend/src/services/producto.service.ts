@@ -1,5 +1,7 @@
 import { PrismaClient, Producto } from "../../generated/prisma";
 import { ProductoDTO } from "../dtos/producto.dto";
+import { TipoProducto } from "../../generated/prisma";//Nos traemos el tipo de producto desde prisma, ya que es un enum generado por Prisma.
+
 
 export class ProductoService {
   private prisma = new PrismaClient();
@@ -24,6 +26,8 @@ export class ProductoService {
           stock: producto.stock,
           imagen: producto.imagen,
           clasificacion: producto.clasificacion,
+          tipoProducto: producto.tipoProducto, // Assuming tipoProducto is part of ProductoDTO
+          // Assuming tipoProducto is part of ProductoDTO
         },
       });
       return newProduct;
@@ -33,15 +37,22 @@ export class ProductoService {
     }
   }
 
-  public async obtenerProductoPorId(id: number): Promise<Producto | null> {
+
+  public async obtenerProductosPorTipoProducto(tipoProducto: TipoProducto): Promise<Producto[]> {
     try {
-      const product = await this.prisma.producto.findUnique({
-        where: { id },
+      const listaProductosPorTipo = await this.prisma.producto.findMany({
+        where: {
+          tipoProducto: {
+            equals: tipoProducto
+          }
+        }
       });
-      return product;
+      return listaProductosPorTipo;
     } catch (error) {
-      console.error("Error al obtener el producto por ID:", error);
+      console.error("Error fetching products by type:", error);
       throw new Error("Internal server error");
     }
   }
 }
+
+

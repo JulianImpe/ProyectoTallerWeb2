@@ -5,3 +5,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+h1{
+    font-family: 'Kaushan Script', cursive;
+    font-size: 3rem;
+}
+p, a, button{
+        font-family: 'Karantina', light;
+        font-weight: 100;
+}
+

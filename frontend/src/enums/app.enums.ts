@@ -1,9 +1,9 @@
 export enum TipoProducto {
-    CAFE_EN_GRANOS = "Café en Granos",
-    FILTROS = "Filtros",
-    CAPSULAS = "Cápsulas",
-    CAFETERAS = "Cafeteras",
-    CAFE_TORRADO = "Café Torrado",
-    MOLINILLOS = "Molinos",
-    ACCESORIOS = "Accesorios" // cucharas medidoras, prensadores, etc.
+    CAFE_EN_GRANOS = "CAFE_EN_GRANOS",
+    FILTROS = "FILTROS",
+    CAPSULAS = "CAPSULAS",
+    CAFETERAS = "CAFETERAS",
+    CAFE_TORRADO = "CAFE_TORRADO",
+    MOLINILLOS = "MOLINILLOS",
+    ACCESORIOS = "ACCESORIOS"
 }

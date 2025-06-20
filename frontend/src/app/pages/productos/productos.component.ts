@@ -2,18 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto/producto.service';
 import { Producto } from '../models/producto';
 import { TipoProducto } from '../../../enums/app.enums';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-productos',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
 
 export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
-  tipoProductos = Object.values(TipoProducto); // Me trae todos los valores del enum TipoProducto
+  tipoProductos = Object.values(TipoProducto);
+
+   // Me trae todos los valores del enum TipoProducto
   //tipoProducto: TipoProducto = TipoProducto.CAFE_EN_GRANOS; // Le pongo un valor por defecto
   constructor(private productoService: ProductoService) {
 

@@ -8,7 +8,7 @@
 <div class="productos">
     <div class="tipoProductos">
     @for (tipoProducto of tipoProductos; track $index) {
-<a (onclick)="obtenerProductosPorTipoProducto(tipoProducto)"> {{tipoProducto}}</a>    
+<a (click)="obtenerProductosPorTipoProducto(tipoProducto)"> {{tipoProducto}}</a>    
 <hr>
 }
 
@@ -19,7 +19,7 @@
             <img [src]="producto.imagen" alt="">
             <div class="datos-producto">
             <li> <p>{{producto.nombre}}</p>
-            <p class="precio">${{producto.precio}}ARS</p>
+            <p class="precio">{{producto.precio | currency}}ARS</p>
             </li>
             </div>
         </div>

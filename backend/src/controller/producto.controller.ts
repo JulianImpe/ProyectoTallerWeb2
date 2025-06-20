@@ -2,35 +2,35 @@ import { ProductoDTO } from "../dtos/producto.dto";
 import { ProductoService } from "../services/producto.service";
 import { Request, Response } from "express";
 
-export class ProductoController{
-    constructor(private productoService: ProductoService){}
+export class ProductoController {
+    constructor(private productoService: ProductoService) { }
 
     public obtenerProductos = async (req: Request, res: Response) => {
         try {
-          const products = await this.productoService.obtenerProductos();
-          res.status(200).json(products);
+            const products = await this.productoService.obtenerProductos();
+            res.status(200).json(products);
         } catch (error) {
-          console.error("Error fetching products:", error);
-          res.status(500).json({ error: "Internal server error" });
+            console.error("Error fetching products:", error);
+            res.status(500).json({ error: "Internal server error" });
         }
-      };
+    };
     public crearProducto = async (req: Request, res: Response) => {
         try {
-          const { nombre, descripcion, precio, stock, imagen, clasificacion } = req.body;
-          const producto: ProductoDTO = {
-            nombre,
-            descripcion,
-            precio,
-            stock,
-            imagen,
-            clasificacion,
-          };
-    
-          const newProduct = await this.productoService.crearProducto(producto);
-          res.status(201).json(newProduct);
+            const { nombre, descripcion, precio, stock, imagen, clasificacion } = req.body;
+            const producto: ProductoDTO = {
+                nombre,
+                descripcion,
+                precio,
+                stock,
+                imagen,
+                clasificacion,
+            };
+
+            const newProduct = await this.productoService.crearProducto(producto);
+            res.status(201).json(newProduct);
         } catch (error) {
-          console.error("Error creating product:", error);
-          res.status(500).json({ error: "Internal server error" });
+            console.error("Error creating product:", error);
+            res.status(500).json({ error: "Internal server error" });
         }
-      };
+    };
 }

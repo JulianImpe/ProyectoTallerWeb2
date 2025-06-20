@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Router } from 'express';
-import { FooterComponent } from "../../public/footer/footer.component";
-import { HeaderComponent } from '../../public/header/header.component';
+import {RouterOutlet } from '@angular/router';
+import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',

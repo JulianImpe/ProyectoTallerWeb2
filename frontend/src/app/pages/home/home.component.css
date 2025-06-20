@@ -1,4 +1,6 @@
-
+nav{
+    background-color: #59190200 !important;
+}
 h1,
 h2,
 h3 {
@@ -12,7 +14,9 @@ h1 {
     padding: 1rem;
 }
 h2{
-    font-size: 2.5rem;;
+    font-size: 2.5rem;
+    color: #EDBC53;
+
 }
 p, a, button {
     font-family: "Karantina", sans-serif;
@@ -91,74 +95,16 @@ nav ul li {
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;;
 }
-#productos-mas-vendidos{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-        text-align: center;
-}
-.productos{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
-}
-#productos-mas-vendidos h2{
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    color:white;
-}
-.producto img{
-        object-fit: cover;
-    max-width: 100%;
-    height: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
-}
-.producto{
-        width: 100%;
-    height: 100%;/* Ajusta este valor según lo que quieras */
-    overflow: hidden;
-    padding: 1rem;
-}
-.producto button{
-    background-color: #4D1E0A;
+#quienes_somos h2{
     color: white;
-    border-radius: 15px;
-    padding: 0.7rem;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
 }
-.producto button:hover{
-        transform: scale(1.1);
-    transition: all 0.2s ease-in-out;;
-}
-.precio{
-        background-color: #EDBC53;
-    color: #4D1E0A;
-    font-weight: light;
-    border-radius: 15px;
-    padding: 0.5rem;
-    border: none;
-    font-size: 1.2rem;    
-}
-.producto-info{
-    display: flex;
-    
-    flex-direction: row;
 
-}
 #quienes_somos{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 3rem;
 }
 .quienes_somos-container{
     display: flex;
@@ -181,10 +127,10 @@ nav ul li {
     margin: 1rem;
 }
 #quienes_somos button{
-    background-color:rgba(255, 255, 255, 0.086);
-    border: 3px solid rgb(0, 0, 0);
-    border-color: rgba(5, 5, 5, 0.463);
-    color:rgb(0, 0, 0);
+    background-color:#edbc5300(255, 255, 255, 0.086);
+    border: 3px solid #EDBC53(0, 0, 0);
+    border-color: #EDBC53(5, 5, 5, 0.463);
+    color:#EDBC53(0, 0, 0);
     padding: 1rem;
     margin: 1rem;
     width: 30%;

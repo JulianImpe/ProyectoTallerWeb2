@@ -16,7 +16,9 @@
     <ul class="lista-productos">
         @for (producto of productos; track producto.id) {
         <div class="producto">
+            <a (click)="irAVerDetalleProducto(producto.id)" href="#">
             <img [src]="producto.imagen" alt="">
+            </a>
             <div class="datos-producto">
             <li> <p>{{producto.nombre}}</p>
             <p class="precio">{{producto.precio | currency}}ARS</p>

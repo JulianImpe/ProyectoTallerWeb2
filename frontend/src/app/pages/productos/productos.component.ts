@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Producto } from './../models/producto';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto/producto.service';
-import { Producto } from '../models/producto';
+
 import { TipoProducto } from '../../../enums/app.enums';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
   tipoProductos = Object.values(TipoProducto);
-
+  router = inject(Router);
    // Me trae todos los valores del enum TipoProducto
   //tipoProducto: TipoProducto = TipoProducto.CAFE_EN_GRANOS; // Le pongo un valor por defecto
   constructor(private productoService: ProductoService) {
@@ -49,4 +51,9 @@ export class ProductosComponent implements OnInit {
     );
     return this.productos; 
   }
+
+  irAVerDetalleProducto(id: number) {
+    this.router.navigate(['/ver-detalle-producto', id]);
+  }
+
 }

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-productos',
   imports: [CurrencyPipe],
+
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })

@@ -30,6 +30,7 @@ export class ProductosComponent implements OnInit {
     this.productoService.obtenerProductos().subscribe({
       next: (data) => {
         this.productos = data;//Le decimos al obtener productos que se compare con la data para reemplazar su valor.
+      
       },
       error: (error) => {
         console.error('Error al obtener los productos:', error);

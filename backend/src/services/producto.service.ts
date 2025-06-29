@@ -16,6 +16,23 @@ export class ProductoService {
     }
   }
 
+  public async obtenerProductoPorId(id:number): Promise<Producto> {
+    try {
+      const productoEncontrado = await this.prisma.producto.findUnique({
+        where: {
+          id:id
+        }
+      });
+      if (!productoEncontrado) {
+        throw new Error("Producto no encontrado");
+      }
+      return productoEncontrado;
+    } catch (error) {
+      console.error("Error no se encontro el producto por id:", error);
+      throw new Error("Internal server error");
+    }
+  }
+
   public async crearProducto(producto: ProductoDTO): Promise<Producto> {
     try {
       const newProduct = await this.prisma.producto.create({

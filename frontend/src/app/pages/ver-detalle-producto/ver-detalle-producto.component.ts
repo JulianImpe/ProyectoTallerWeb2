@@ -1,11 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductoService } from '../../services/producto/producto.service';
+import id from '@angular/common/locales/id';
+import { Producto } from '../models/producto';
+import { CurrencyPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-ver-detalle-producto',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './ver-detalle-producto.component.html',
   styleUrl: './ver-detalle-producto.component.css'
 })
-export class VerDetalleProductoComponent {
+export class VerDetalleProductoComponent implements OnInit {
+
+
+    producto!: Producto;
+  productos: Producto[] = [];
+  constructor(private productoService: ProductoService, private router: ActivatedRoute) {
+
+  }
+
+ngOnInit(): void {
+const id = this.router?.snapshot.paramMap.get('id');
+if(id){
+  this.productoService.irAVerDetalleProducto(Number(id)).subscribe({
+    
+    next: (data)=> this.producto = data,
+        error: (error) => {
+        console.error('Error al obtener el producto:', error);
+      }
+  })
+}
+console.log(this.producto);
+}
+  agregarAlCarrito(arg0: number) {
+throw new Error('Method not implemented.');
+}
+
 
 }

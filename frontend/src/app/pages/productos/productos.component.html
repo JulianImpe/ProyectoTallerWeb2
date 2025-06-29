@@ -16,7 +16,7 @@
     <ul class="lista-productos">
         @for (producto of productos; track producto.id) {
         <div class="producto">
-            <a (click)="irAVerDetalleProducto(producto.id)" href="#">
+            <a (click)="irAVerDetalleProducto(producto.id)">
             <img [src]="producto.imagen" alt="">
             </a>
             <div class="datos-producto">

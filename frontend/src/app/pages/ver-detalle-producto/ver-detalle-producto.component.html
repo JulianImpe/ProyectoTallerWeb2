@@ -1,1 +1,14 @@
-<p>ver-detalle-producto works!</p>
+<h1>header</h1>
+<div class="detalle-producto">
+@if (producto) {
+    
+    <div class="detalle-producto">
+        <img [src]="producto.imagen" alt="">
+        <h2>{{producto.nombre}}</h2>
+        <p class="precio">{{producto.precio | currency}}ARS</p>
+        <p>{{producto.descripcion}}</p>
+        <p>Stock: {{producto.stock}}</p>
+        <button (click)="agregarAlCarrito(producto.id)">Agregar al carrito</button>
+    </div>
+}
+</div>

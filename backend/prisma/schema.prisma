@@ -31,7 +31,17 @@ model Producto {
   precio        Float
   stock         Int
   imagen        String
-
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  tipoProducto  TipoProducto @default(CAFE_EN_GRANOS)
+}
+
+enum TipoProducto{
+  CAFE_EN_GRANOS
+  FILTROS
+  CAPSULAS
+  CAFETERAS
+  CAFE_TORRADO
+  MOLINILLOS
+  ACCESORIOS 
 }

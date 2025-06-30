@@ -1,0 +1,32 @@
+<app-header></app-header>
+<section id="seccion-productos">
+    <div id="titulo">
+<h1>Productos</h1>
+</div>
+
+<div class="productos">
+    <div class="tipoProductos">
+    @for (tipoProducto of tipoProductos; track $index) {
+<a (click)="obtenerProductosPorTipoProducto(tipoProducto)"> {{tipoProducto}}</a>    
+<hr>
+}
+
+</div>
+    <ul class="lista-productos">
+        @for (producto of productos; track producto.id) {
+        <div class="producto">
+            <img [src]="producto.imagen" alt="">
+            <div class="datos-producto">
+            <li> <p>{{producto.nombre}}</p>
+            <p class="precio">{{producto.precio | currency}}ARS</p>
+            </li>
+            </div>
+        </div>
+        }
+    </ul>
+</div>
+</section>
+<div>
+<app-footer></app-footer>
+</div>
+

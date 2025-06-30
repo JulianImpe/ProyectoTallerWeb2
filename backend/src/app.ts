@@ -3,7 +3,7 @@ import { AppRoutes } from "./routes/routes.routes";
 import { Server } from "./server/server";
 
 (async () => {
-  main();
+main();
 })();
 
 

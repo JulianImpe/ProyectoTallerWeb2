@@ -1,25 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map } from 'rxjs';
 
-export interface User {
-  id: number;
-  nombre: string;
-  apellido: string;
+export interface CredencialesLogin {
   email: string;
+  contraseña: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private _url = 'http://localhost:3000/api/usuario';
 
-  private users: User[] = [
-    { id: 1, nombre: 'Juli', apellido: 'Imperiale', email: 'juli@gmail.com' },
-    { id: 2, nombre: 'Juan', apellido: 'Perez', email: 'jua@gmail.com' },
-    { id: 3, nombre: 'Ana', apellido: 'Gomez', email: 'ana@gmail.com' }
-  ]
-  constructor() { }
-  getUsers(): Observable<User[]> {
-    return of(this.users);
+  http = inject(HttpClient);
+  constructor() {}
+
+
+
+  iniciarSesion(credenciales: CredencialesLogin) {
+    return this.http.post(`${this._url}/login`, credenciales).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 }

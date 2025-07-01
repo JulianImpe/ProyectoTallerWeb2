@@ -1,11 +1,22 @@
 <div class="login-container">
-<div class="form-container">
-    <h1> Login</h1>
-    <form action="submit">
-        <input type="text" name="username" placeholder="username" required>
-        <input type="password" name="password" placeholder="password" required>
-        <button type="submit">Login</button>
+  <div class="form-container">
+    <h1>Login</h1>
+
+    <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" formControlName="contraseña" required>
+      </div>
+
+      <button type="submit">Iniciar Sesión</button>
     </form>
-    <p>¿No tenés una cuenta?<a routerLink="/signup"></a></p>
-</div>
+
+    <p>¿No tenés una cuenta? <a routerLink="/signup">Registrate</a></p>
+  </div>
 </div>

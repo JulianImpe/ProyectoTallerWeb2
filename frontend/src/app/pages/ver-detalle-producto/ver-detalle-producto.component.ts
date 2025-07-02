@@ -22,7 +22,7 @@ export class VerDetalleProductoComponent implements OnInit {
   }
 
 ngOnInit(): void {
-const id = this.router?.snapshot.paramMap.get('id');
+const id = this.router?.snapshot.paramMap.get('id');//Capturo el id en el momento que se carga el componente
 if(id){
   this.productoService.irAVerDetalleProducto(Number(id)).subscribe({
     

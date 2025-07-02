@@ -15,7 +15,7 @@ export class ProductoController {
                 stock,
                 imagen,
                 clasificacion,
-                tipoProducto 
+                tipoProducto: Number(tipoProducto)
             };
             const newProducto = await this.productoService.crearProducto(producto)
             res.status(201).json(newProducto);
@@ -54,5 +54,5 @@ export class ProductoController {
         }
     }
 
-    
+
 }

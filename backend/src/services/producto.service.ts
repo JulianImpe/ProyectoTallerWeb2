@@ -18,6 +18,11 @@ export class ProductoService {
 
   public async crearProducto(producto: ProductoDTO): Promise<Producto> {
     try {
+      const tipo = await this.prisma.tipoProducto.findUnique({
+        where: {
+          id: producto.tipoProducto,
+        },
+      });
       const newProduct = await this.prisma.producto.create({
         data: {
           nombre: producto.nombre,
@@ -26,8 +31,11 @@ export class ProductoService {
           stock: producto.stock,
           imagen: producto.imagen,
           clasificacion: producto.clasificacion,
-          tipoProducto: producto.tipoProducto, // Assuming tipoProducto is part of ProductoDTO
-          // Assuming tipoProducto is part of ProductoDTO
+          tipoProducto: {
+            connect: {
+              id: producto.tipoProducto,
+            },
+          },
         },
       });
       return newProduct;
@@ -38,12 +46,12 @@ export class ProductoService {
   }
 
 
-  public async obtenerProductosPorTipoProducto(tipoProducto: TipoProducto): Promise<Producto[]> {
+  public async obtenerProductosPorTipoProducto(tipoProductoId: number): Promise<Producto[]> {
     try {
       const listaProductosPorTipo = await this.prisma.producto.findMany({
         where: {
           tipoProducto: {
-            equals: tipoProducto
+            id: tipoProductoId
           }
         }
       });
@@ -53,6 +61,17 @@ export class ProductoService {
       throw new Error("Internal server error");
     }
   }
+
+  public async obtenerTiposDeProducto(){
+    try {
+      const tipos = await this.prisma.tipoProducto.findMany({});
+      return tipos;
+    } catch (error) {
+      console.error("Error fetching products by type:", error);
+      throw new Error("Internal server error");
+    }
+  }
+
 }
 
 

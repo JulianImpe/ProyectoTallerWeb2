@@ -7,5 +7,5 @@ export interface ProductoDTO {
     descripcion: string;
     imagen: string;
     clasificacion: string;
-    tipoProducto: TipoProducto;
+    tipoProducto: number;
 }

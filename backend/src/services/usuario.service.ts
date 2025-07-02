@@ -1,5 +1,6 @@
 import { PrismaClient, Usuario } from "../../generated/prisma";
 import { cifrarContraseña, compararContraseñas } from "../auth/bcrypt";
+import { createToken, DatosEncriptados } from "../auth/jwt";
 import UsuarioDTO from "../dtos/usuario.dto";
 export class UsuarioService {
   private prisma = new PrismaClient();
@@ -13,6 +14,7 @@ export class UsuarioService {
           email: usuario.email,
           contrasena: contraseñaCifrada,
           direccion: usuario.direccion,
+          rol: "user",
         },
       });
       return newUser;
@@ -65,9 +67,12 @@ export class UsuarioService {
       const user = await this.prisma.usuario.findUnique({
         where: { email },
       });
-      if (user && (await compararContraseñas(contraseña, user.contrasena)))
-        return user;
-      else return null;
+      if (user && (await compararContraseñas(contraseña, user.contrasena))) {
+        return await createToken({
+          id: user.id,
+          email: user.email,
+        } as DatosEncriptados);
+      } else return null;
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       throw new Error("Internal server error");

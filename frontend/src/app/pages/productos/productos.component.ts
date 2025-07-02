@@ -1,15 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Producto } from './../models/producto';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto/producto.service';
-import { Producto } from '../models/producto';
+
 import { TipoProducto } from '../../../enums/app.enums';
 import { CurrencyPipe } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from "../header/header.component";
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-productos',
   imports: [CurrencyPipe, FooterComponent, HeaderComponent],
+
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
@@ -17,7 +20,7 @@ import { HeaderComponent } from "../header/header.component";
 export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
   tipoProductos = Object.values(TipoProducto);
-
+  router = inject(Router);
    // Me trae todos los valores del enum TipoProducto
   //tipoProducto: TipoProducto = TipoProducto.CAFE_EN_GRANOS; // Le pongo un valor por defecto
   constructor(private productoService: ProductoService) {
@@ -29,6 +32,7 @@ export class ProductosComponent implements OnInit {
     this.productoService.obtenerProductos().subscribe({
       next: (data) => {
         this.productos = data;//Le decimos al obtener productos que se compare con la data para reemplazar su valor.
+      
       },
       error: (error) => {
         console.error('Error al obtener los productos:', error);
@@ -51,4 +55,9 @@ export class ProductosComponent implements OnInit {
     );
     return this.productos; 
   }
+
+  irAVerDetalleProducto(id: number) {
+    this.router.navigate(['/ver-detalle-producto', id]);
+  }
+
 }

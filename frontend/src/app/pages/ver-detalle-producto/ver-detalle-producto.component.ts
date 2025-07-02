@@ -4,11 +4,13 @@ import { ProductoService } from '../../services/producto/producto.service';
 import id from '@angular/common/locales/id';
 import { Producto } from '../models/producto';
 import { CurrencyPipe } from '@angular/common';
+import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from "../header/header.component";
 
 
 @Component({
   selector: 'app-ver-detalle-producto',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, FooterComponent, HeaderComponent],
   templateUrl: './ver-detalle-producto.component.html',
   styleUrl: './ver-detalle-producto.component.css'
 })

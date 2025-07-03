@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterOutlet } from '@angular/router';
-import { FooterComponent } from "../footer/footer.component";
-import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from "../../../../public/footer/footer.component";
+import { HeaderComponent } from '../../../../public/header/header.component';
 
 @Component({
   selector: 'app-home',

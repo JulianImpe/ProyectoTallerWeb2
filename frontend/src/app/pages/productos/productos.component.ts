@@ -4,8 +4,8 @@ import { ProductoService } from '../../services/producto/producto.service';
 
 import { TipoProducto } from '../../../enums/app.enums';
 import { CurrencyPipe } from '@angular/common';
-import { FooterComponent } from "../footer/footer.component";
-import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../../../../public/footer/footer.component";
+import { HeaderComponent } from "../../../../public/header/header.component";
 import { Router } from '@angular/router';
 
 

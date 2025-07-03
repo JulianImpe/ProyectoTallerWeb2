@@ -1,11 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { CredencialesLogin, UserService } from '../../services/user.service';
+import { Router, RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, ToastModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -18,11 +27,12 @@ export class LoginComponent implements OnInit {
 
   messageService = inject(MessageService);
   usuarioService = inject(UserService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      contraseña: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contraseña: ['', [Validators.required]],
     });
   }
 
@@ -37,18 +47,14 @@ export class LoginComponent implements OnInit {
     }
 
     const credenciales: CredencialesLogin = {
-      email: this.form.value.username,
-      contraseña: this.form.value.password,
+      email: this.form.value.email,
+      contraseña: this.form.value.contraseña,
     };
 
     this.usuarioService.iniciarSesion(credenciales).subscribe({
       next: (response) => {
-        console.log('Inicio de sesión exitoso', response);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Bienvenido',
-          detail: 'Sesión iniciada correctamente',
-        });
+        localStorage.setItem('token', JSON.stringify(response));
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         console.error('Error al iniciar sesión:', error);

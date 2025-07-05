@@ -1,7 +1,37 @@
+.tabla-carrito {
+  min-width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
-.pi-trash:hover{
-  color: rgb(97, 3, 3);
-  cursor: pointer;
-  transform: scale(1.2);
-  transition: all 0.2s ease-in-out;;
+.img-producto {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.boton-eliminar {
+  margin: 0 auto;
+}
+
+.total-carrito {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.boton-comprar {
+  background-color: #4ade80;
+}
+
+.boton-vaciar {
+  background-color: #f87171;
+}
+
+.card-resumen {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }

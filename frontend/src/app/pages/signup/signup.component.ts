@@ -1,21 +1,33 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../services/user.service';
-import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 import { ToastModule } from 'primeng/toast';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [HeaderComponent, FooterComponent, FormsModule, ReactiveFormsModule, ToastModule, RouterLink],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastModule,
+    RouterLink,
+  ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrl: './signup.component.css',
 })
 export class SignupComponent implements OnInit {
-
-   form!: FormGroup;
+  form!: FormGroup;
   private fb = inject(FormBuilder);
 
   messageService = inject(MessageService);
@@ -25,8 +37,14 @@ export class SignupComponent implements OnInit {
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      contraseña: ['', [Validators.required]],
-      confirmarContraseña: ['', [Validators.required, ]],
+      contraseña: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*[A-Z])[A-Za-z\d]{6,}$/),
+        ],
+      ],
+      confirmarContraseña: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
     });
   }

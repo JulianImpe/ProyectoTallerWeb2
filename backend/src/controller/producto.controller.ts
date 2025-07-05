@@ -54,5 +54,55 @@ export class ProductoController {
         }
     }
 
+    public obtenerProductoPorId = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const producto = await this.productoService.obtenerProductoPorId(Number(id));
+            if (!producto) {
+                res.status(404).json({ error: "Product not found" });
+            }
+            res.status(200).json(producto);
+        } catch (error) {
+            console.error("Error fetching product by ID:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
 
+    public actualizarProductoPorId = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const { nombre, descripcion, precio, stock, imagen, clasificacion, tipoProducto } = req.body;
+            const producto: ProductoDTO = {
+                nombre,
+                descripcion,
+                precio,
+                stock,
+                imagen,
+                clasificacion,
+                tipoProducto: Number(tipoProducto)
+            };
+            const updatedProducto = await this.productoService.actualizarProductoPorId(Number(id), producto);
+            if (!updatedProducto) {
+                res.status(404).json({ error: "Product not found" });
+            }
+            res.status(200).json(updatedProducto);
+        } catch (error) {
+            console.error("Error updating product by ID:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    public eliminarProductoPorId = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const deletedProducto = await this.productoService.eliminarProductoPorId(Number(id));
+            if (!deletedProducto) {
+                res.status(404).json({ error: "Product not found" });
+            }
+            res.status(200).json({ message: "Product deleted successfully" });
+        } catch (error) {
+            console.error("Error deleting product by ID:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
 }

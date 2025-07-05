@@ -72,6 +72,54 @@ export class ProductoService {
     }
   }
 
+  public async obtenerProductoPorId(id: number): Promise<Producto | null> {
+    try {
+      const producto = await this.prisma.producto.findUnique({
+        where: { id },
+      });
+      return producto;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      throw new Error("Internal server error");
+    }
+  }
+
+  public async actualizarProductoPorId(id: number, producto: ProductoDTO): Promise<Producto> {
+    try {
+      const updatedProduct = await this.prisma.producto.update({
+        where: { id },
+        data: {
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precio: producto.precio,
+          stock: producto.stock,
+          imagen: producto.imagen,
+          clasificacion: producto.clasificacion,
+          tipoProducto: {
+            connect: {
+              id: producto.tipoProducto,
+            },
+          },
+        },
+      });
+      return updatedProduct;
+    } catch (error) {
+      console.error("Error updating product by ID:", error);
+      throw new Error("Internal server error");
+    }
+  }
+
+  public async eliminarProductoPorId(id: number): Promise<Producto> {
+    try {
+      const deletedProduct = await this.prisma.producto.delete({
+        where: { id },
+      });
+      return deletedProduct;
+    } catch (error) {
+      console.error("Error deleting product by ID:", error);
+      throw new Error("Internal server error");
+    }
+  }
 }
 
 

@@ -1,32 +1,33 @@
 <app-header></app-header>
+<p-toast />
 <section id="seccion-productos">
-    <div id="titulo">
-<h1>Productos</h1>
-</div>
+  <div id="titulo">
+    <h1>Productos</h1>
+  </div>
 
-<div class="productos">
+  <div class="productos">
     <div class="tipoProductos">
-    @for (tipoProducto of tipoProductos; track $index) {
-<a (click)="obtenerProductosPorTipoProducto(tipoProducto)"> {{tipoProducto}}</a>    
-<hr>
-}
-
-</div>
-    <ul class="lista-productos">
-        @for (producto of productos; track producto.id) {
-        <div class="producto">
-            <img [src]="producto.imagen" alt="">
-            <div class="datos-producto">
-            <li> <p>{{producto.nombre}}</p>
-            <p class="precio">{{producto.precio | currency}}ARS</p>
-            </li>
-            </div>
+      @for (tipoProducto of tipoProductos; track $index) {
+      <a (click)="obtenerProductosPorTipoProducto(tipoProducto)">
+        {{ tipoProducto }}</a
+      >
+      <hr />
+      }
+    </div>
+    <div class="lista-productos">
+      @for (producto of productos; track producto.id) {
+      <div class="producto">
+        <img [src]="producto.imagen" alt="" />
+        <div class="datos-producto">
+          <p>{{ producto.nombre }}</p>
+          <p class="precio">{{ producto.precio | currency }}ARS</p>
         </div>
-        }
-    </ul>
-</div>
+        <button (click)="agregarProducto(producto)">Agregar al carrito</button>
+      </div>
+      }
+    </div>
+  </div>
 </section>
 <div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
 </div>
-

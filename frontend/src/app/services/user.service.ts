@@ -24,11 +24,24 @@ export class UserService {
     );
   }
 
-  registrar(usuario : UsuarioRegistro){
+  registrar(usuario: UsuarioRegistro) {
     return this.http.post(`${this._url}`, usuario).pipe(
       map((response) => {
         return response;
       })
     );
+  }
+
+  verificarSesion(): boolean {
+    const token = localStorage.getItem('token');
+    const response = this.http.post(`${this._url}/validar-token`, { token });
+
+    const data = response.pipe(
+      map((response) => {
+        return response;
+      })
+    );
+
+    return data ? true : false;
   }
 }

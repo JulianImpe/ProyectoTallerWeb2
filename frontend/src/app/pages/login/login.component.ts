@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
 
     this.usuarioService.iniciarSesion(credenciales).subscribe({
       next: (response) => {
-        localStorage.setItem('token', JSON.stringify(response));
+        let token = JSON.stringify(response).replace(/"/g, '');
+        localStorage.setItem('token', token);
         this.router.navigate(['/home']);
       },
       error: (error) => {

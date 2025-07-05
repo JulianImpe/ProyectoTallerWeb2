@@ -1,0 +1,7 @@
+
+.pi-trash:hover{
+  color: rgb(97, 3, 3);
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;;
+}

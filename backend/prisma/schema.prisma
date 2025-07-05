@@ -9,13 +9,32 @@ datasource db {
 }
 
 model Usuario {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   nombre     String
   apellido   String
-  email      String  @unique
+  email      String   @unique
   contrasena String
   direccion  String
   rol        String 
+
+  carrito    Carrito?
+}
+
+model Carrito {
+  id        Int      @id @default(autoincrement())
+  usuarioId Int      @unique
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  items     ItemCarrito[]
+}
+
+model ItemCarrito {
+  id         Int      @id @default(autoincrement())
+  carritoId  Int
+  productoId Int
+  cantidad   Int
+
+  carrito    Carrito   @relation(fields: [carritoId], references: [id])
+  producto   Producto  @relation(fields: [productoId], references: [id])
 }
 
 model Producto {
@@ -30,11 +49,12 @@ model Producto {
   updatedAt       DateTime       @updatedAt
   tipoProductoId  Int
   tipoProducto    TipoProducto   @relation(fields: [tipoProductoId], references: [id])
+
+  itemsCarrito    ItemCarrito[]
 }
 
 model TipoProducto {
-  id    Int     @id @default(autoincrement())
-  nombre String @unique
-  productos Producto[]
+  id         Int        @id @default(autoincrement())
+  nombre     String     @unique
+  productos  Producto[]
 }
-

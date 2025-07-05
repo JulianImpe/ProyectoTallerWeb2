@@ -12,3 +12,6 @@ usuarioRouter.post('/', usuarioController.crearUsuario.bind(usuarioController));
 usuarioRouter.post('/email', usuarioController.obtenerUsuarioPorEmail.bind(usuarioController));
 usuarioRouter.post('/login', usuarioController.iniciarSesion.bind(usuarioController));
 usuarioRouter.post('/actualizar', usuarioController.actualizarContraseña.bind(usuarioController));
+usuarioRouter.post('/validar-token', usuarioController.validarToken.bind(usuarioController));
+usuarioRouter.get('/carrito', usuarioController.obtenerCarritoPorUsuarioId.bind(usuarioController));
+usuarioRouter.post('/agregar-al-carrito', usuarioController.agregarAlCarrito.bind(usuarioController));

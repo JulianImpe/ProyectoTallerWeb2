@@ -42,4 +42,28 @@ export class CarritoService {
     }
     return '';
   }
+
+  vaciarCarrito() {
+    const token = this.getToken();
+    if (!token) {
+      return;
+    }
+    const headers = new HttpHeaders().append(
+      'Authorization',
+      'Bearer ' + token
+    );
+    this.http.delete(`${this.apiUrl}/carrito`, { headers }).subscribe();
+  }
+
+  eliminarProductoDelCarrito(id: number) {
+    const token = this.getToken();
+    if (!token) {
+      return;
+    }
+    const headers = new HttpHeaders().append(
+      'Authorization',
+      'Bearer ' + token
+    );
+    this.http.delete(`${this.apiUrl}/carrito/${id}`, { headers }).subscribe();
+  }
 }

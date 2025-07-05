@@ -9,12 +9,11 @@ import { ItemCarrito } from '../../interfaces/item-carrito.interface';
 @Component({
   selector: 'app-carrito-list',
   imports: [ProgressSpinner],
-templateUrl: './carrito-list.component.html',
-  styleUrl: './carrito-list.component.css'
+  templateUrl: './carrito-list.component.html',
+  styleUrl: './carrito-list.component.css',
 })
-export class CarritoListComponent implements  OnInit, OnDestroy{
-  constructor(){
-  }
+export class CarritoListComponent implements OnInit, OnDestroy {
+  constructor() {}
 
   carritoService = inject(CarritoService);
   messageService = inject(MessageService);
@@ -22,24 +21,49 @@ export class CarritoListComponent implements  OnInit, OnDestroy{
   productos!: ItemCarrito[];
   total: number = 0;
 
-  spinner:boolean = true;
+  spinner: boolean = true;
 
-
-  ngOnInit(){
+  ngOnInit() {
     this.carrito = this.carritoService.obtenerCarrito();
     this.carrito.subscribe({
       next: (data) => {
         this.spinner = false;
-        this.productos = data.items
-        this.total = data.items.reduce((total, item) => total + item.precio * item.cantidad, 0);
+        this.productos = data.items;
+        this.total = data.items.reduce(
+          (total, item) => total + item.precio * item.cantidad,
+          0
+        );
       },
-    })
+    });
   }
 
-  eliminarProducto(id: number){
-
+  eliminarProducto(id: number) {
+    this.carritoService.eliminarProductoDelCarrito(id);
+    this.carrito.subscribe({
+      next: (data) => {
+        this.productos = data.items;
+        this.total = data.items.reduce(
+          (total, item) => total + item.precio * item.cantidad,
+          0
+        );
+      },
+    });
+    this.carrito = this.carritoService.obtenerCarrito();
   }
 
-  ngOnDestroy(){
+  vaciarCarrito() {
+    this.carritoService.vaciarCarrito();
+    this.carrito.subscribe({
+      next: (data) => {
+        this.productos = data.items;
+        this.total = data.items.reduce(
+          (total, item) => total + item.precio * item.cantidad,
+          0
+        );
+      },
+    });
+    this.carrito = this.carritoService.obtenerCarrito();
   }
+
+  ngOnDestroy() {}
 }

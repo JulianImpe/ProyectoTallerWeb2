@@ -15,3 +15,6 @@ usuarioRouter.post('/actualizar', usuarioController.actualizarContraseña.bind(u
 usuarioRouter.post('/validar-token', usuarioController.validarToken.bind(usuarioController));
 usuarioRouter.get('/carrito', usuarioController.obtenerCarritoPorUsuarioId.bind(usuarioController));
 usuarioRouter.post('/agregar-al-carrito', usuarioController.agregarAlCarrito.bind(usuarioController));
+usuarioRouter.delete('/carrito', usuarioController.eliminarProductosDelCarrito.bind(usuarioController));
+usuarioRouter.delete('/carrito/:id', usuarioController.eliminarProductoDelCarritoPorId.bind(usuarioController));
+

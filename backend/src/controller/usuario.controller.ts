@@ -166,4 +166,49 @@ export class UsuarioController {
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
+  public eliminarProductosDelCarrito = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ error: "Token es obligatorio o inválido" });
+        return;
+      }
+
+      const token = authHeader.split(" ")[1];
+      const carrito = await this.usuarioService.eliminarProductosDelCarrito(token);
+      if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+      else res.status(200).json(carrito);
+    } catch (error) {
+      console.error("Error al eliminar productos del carrito:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  public eliminarProductoDelCarritoPorId = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ error: "Token es obligatorio o inválido" });
+        return;
+      }
+
+      const token = authHeader.split(" ")[1];
+      const { id } = req.params;
+      if (!token || !id) {
+        res.status(400).json({ error: "Token y id de producto son obligatorios" });
+      }
+      const carrito = await this.usuarioService.eliminarProductoDelCarritoPorId(
+        token,
+        Number(id)
+      );
+      if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+      else res.status(200).json(carrito);
+    } catch (error) {
+      console.error("Error al eliminar producto del carrito por ID:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
 }

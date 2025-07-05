@@ -180,4 +180,38 @@ export class UsuarioService {
       throw new Error("Internal server error");
     }
   }
+
+  public async eliminarProductosDelCarrito(token: string){
+    try {
+      const { id } = await decodeToken(token);
+      if (!id) return null;
+      await this.prisma.itemCarrito.deleteMany({
+        where: {
+          carrito: {
+            usuarioId: id
+          }
+        }
+      });
+      return await this.obtenerCarritoPorUsuarioId(token);
+    } catch (error) {
+      console.error("Error al eliminar productos del carrito:", error);
+      throw new Error("Internal server error");
+    }
+  }
+
+  public async eliminarProductoDelCarritoPorId(token: string, idItem: number){
+    try {
+      const { id } = await decodeToken(token);
+      if (!id) return null;
+      await this.prisma.itemCarrito.delete({
+        where: {
+          id: idItem
+        }
+      });
+      return await this.obtenerCarritoPorUsuarioId(token);
+    } catch (error) {
+      console.error("Error al eliminar productos del carrito:", error);
+      throw new Error("Internal server error");
+    }
+  }
 }

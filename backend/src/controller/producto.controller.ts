@@ -43,6 +43,47 @@ export class ProductoController {
             res.status(500).json({ error: "Internal server error" });
         }
     }
+    public obtenerProductosPorNombre = async(req: Request, res:Response) =>{
+        try { 
+            const { nombre } = req.params;
+            const listaProductosPorNombre = await this.productoService.obtenerProductosPorNombre(nombre);
+        res.status(200).json(listaProductosPorNombre);
+        } catch (error) {
+                        console.error("Error al traer los productos por tipo:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+    public obtenerProductosPorRangoPrecio = async(req: Request, res:Response) =>{
+        try { 
+            const { precioMinimo } = req.params;
+            const { precioMaximo } = req.params;
+            const listaProductosPorRangoPrecio = await this.productoService.obtenerProductosPorRangoPrecio(Number(precioMinimo), Number(precioMaximo));
+        res.status(200).json(listaProductosPorRangoPrecio);
+        } catch (error) {
+                        console.error("Error al traer los productos por precio:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+    public obtenerProductosPorDescripcion = async(req: Request, res:Response) =>{
+        try { 
+            const { descripcion } = req.params;
+            const listaProductosPorTipo = await this.productoService.obtenerProductosPorDescripcion(descripcion);
+        res.status(200).json(listaProductosPorTipo);
+        } catch (error) {
+                        console.error("Error al traer los productos por descripcion:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+    public obtenerProductosPorStock = async(req: Request, res:Response) =>{
+        try { 
+            const { stock } = req.params;
+            const listaProductosPorTipo = await this.productoService.obtenerProductosPorStock(Number(stock));
+        res.status(200).json(listaProductosPorTipo);
+        } catch (error) {
+                        console.error("Error al traer los productos por stock:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
     public obtenerProductoPorId = async(req: Request, res:Response) =>{
         try { 
             const { id } = req.params;

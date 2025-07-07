@@ -4,12 +4,24 @@ header h1{
     }
 header{
     color: white;
-
+}
+.nav-transparente {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+img{
+    object-fit: cover;
 }
 header a{
     text-decoration: none;
         color: white;
         font-family: "Karantina", sans-serif;
+        cursor: pointer;
+}
+header a:hover{
+    color: #EDBC53;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
 }
 
 nav {
@@ -17,7 +29,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     font-size: 1.7rem;
-        background-color: #59190260;
+        background-color: #591902;
 }
 
 nav ul {

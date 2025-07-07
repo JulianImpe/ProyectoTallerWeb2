@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import {Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../../../../public/footer/footer.component";
 import { HeaderComponent } from '../../../../public/header/header.component';
 
@@ -11,5 +11,8 @@ import { HeaderComponent } from '../../../../public/header/header.component';
 })
 
 export class HomeComponent {
-
+    router = inject(Router);
+  irHacia(ruta:string) {
+    this.router.navigate([ruta]);
+  }
 }

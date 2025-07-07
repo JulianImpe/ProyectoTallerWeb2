@@ -11,3 +11,7 @@ productoRouter.get('/', productoController.obtenerProductos.bind(productoControl
 productoRouter.post('/', productoController.crearProducto.bind(productoController));
 productoRouter.get('/tipo/:tipoProducto', productoController.obtenerProductosPorTipoProducto.bind(productoController));
 productoRouter.get('/:id', productoController.obtenerProductoPorId.bind(productoController));
+productoRouter.get('/nombre/:nombre', productoController.obtenerProductosPorNombre.bind(productoController));
+productoRouter.get('/descripcion/:descripcion', productoController.obtenerProductosPorDescripcion.bind(productoController));
+productoRouter.get('/precio/:precioMinimo/:precioMaximo', productoController.obtenerProductosPorRangoPrecio.bind(productoController));
+productoRouter.get('/stock/:stock', productoController.obtenerProductosPorStock.bind(productoController));

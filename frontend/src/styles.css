@@ -1,16 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Karantina:wght@100;400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-h1{
+
+h1 {
     font-family: 'Kaushan Script', cursive;
     font-size: 3rem;
 }
-p, a, button{
-        font-family: 'Karantina', light;
-        font-weight: 100;
+
+p,
+a,
+button {
+    font-family: 'Karantina', light;
+    font-weight: 100;
 }
 
+h2 {
+    font-family: 'Karantina', light;
+    font-size: 2rem;
+}
+
+input {
+    font-family: 'Karantina', light;
+    font-weight: 100;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem;
+    font-size: 1.1rem;
+    border: solid 1px rgb(211, 226, 243);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    vertical-align: middle;
+    font-size: 1rem;
+    padding: 12px;
+    color: white;
+    background-color: #EDBC53;
+        border-radius: 15px;
+    margin: 0.5rem;
+    border: none;
+}
+
+button:hover {
+    background-color: #9c6b00;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}

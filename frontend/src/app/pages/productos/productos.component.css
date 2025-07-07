@@ -1,6 +1,6 @@
 img {
-    width: 100px;
-    height: 100px;
+    width: 30%;
+    height: 30%;
 }
 
 .tipoProductos {
@@ -29,7 +29,7 @@ img {
 
 .productos {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1rem;
 }
 
@@ -90,4 +90,35 @@ img {
 .datos-producto p{
         vertical-align: middle;
     font-size: 1.5rem;;
+}
+.filtro-productos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+margin-bottom: 1rem;
+vertical-align: middle;
+}
+.filtro-productos i{
+    vertical-align: middle;
+    margin: 5px;
+}
+.boton-filtro{
+            vertical-align: middle;
+    font-size: 1rem;
+    padding: 12px;
+    color: white;
+    background-color: #EDBC53;
+    border-radius: 50%;
+    margin: 0.5rem;
+    border: none;
+}
+.boton-filtro:hover{
+        background-color: #9c6b00;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}
+#flecha{
+    font-size: 1rem;
 }

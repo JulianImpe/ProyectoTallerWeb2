@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { MonoTypeOperatorFunction, Observable } from 'rxjs';
 import { Producto } from '../../pages/models/producto';
 import { TipoProducto } from '../../../enums/app.enums';
 
@@ -8,6 +8,13 @@ import { TipoProducto } from '../../../enums/app.enums';
   providedIn: 'root'
 })
 export class ProductoService {
+  pipe(arg0: MonoTypeOperatorFunction<unknown>) {
+    throw new Error('Method not implemented.');
+  }
+  debounceTime(arg0: number) {
+    throw new Error('Method not implemented.');
+  }
+
   private apiUrl = 'http://localhost:3000/api/productos';//Es la URL donde se encuentran los productos en nuestro back de Node.js
   // Esta URL debe coincidir con la ruta definida con el servidor Express para manejar productos
   // Le pedimos una request HTTP al servidor para que nos traiga los productos
@@ -27,5 +34,14 @@ export class ProductoService {
 
   irAVerDetalleProducto(id: number): Observable<Producto> {
     return this.http.get<Producto>(`${this.apiUrl}/${id}`);
+  }
+  obtenerProductosPorNombre(nombre: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/nombre/${nombre}`);
+  }
+  obtenerProductosPorDescripcion(descripcion: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/descripcion/${descripcion}`);
+  }
+  obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/precio/${precioMinimo}/${precioMaximo}`);
   }
 }

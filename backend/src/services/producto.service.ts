@@ -4,7 +4,69 @@ import { TipoProducto } from "../../generated/prisma";//Nos traemos el tipo de p
 
 
 export class ProductoService {
-  private prisma = new PrismaClient();
+    private prisma = new PrismaClient();
+  public async obtenerProductosPorNombre(nombre: string) : Promise<Producto[]> {
+    try {
+      const productos = await this.prisma.producto.findMany({
+        where: {
+          nombre: {
+            contains: nombre,
+          },
+        },
+      });
+      return productos;
+    } catch (error) {
+      console.error("Error al encontrar productos por nombre:", error);
+      throw new Error("Internal server error");
+    }
+  }
+  
+  public async obtenerProductosPorDescripcion(descripcion: string) : Promise<Producto[]> {
+    try {
+      const productos = await this.prisma.producto.findMany({
+        where: {
+          descripcion: {
+            contains: descripcion,
+          },
+        },
+      });
+      return productos;
+    } catch (error) {
+      console.error("Error al encontrar productos por descripcion:", error);
+      throw new Error("Internal server error");
+    }
+  }
+  public async obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number) : Promise<Producto[]> {
+    try {
+      const productos = await this.prisma.producto.findMany({
+        where: {
+          precio: {
+            gte: precioMinimo,//Mayor que o igual
+            lte: precioMaximo,//Menor que o igual
+          },
+        },
+      });
+      return productos;
+    } catch (error) {
+      console.error("Error al encontrar productos por precio:", error);
+      throw new Error("Internal server error");
+    }
+  }
+public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
+  try {
+    const productos = await this.prisma.producto.findMany({
+      where: {
+        stock: {
+          equals: stock,
+        },
+      },
+    });
+    return productos;
+  } catch (error) {
+    console.error("Error al encontrar productos por stock:", error);
+    throw new Error("Internal server error");
+  }
+}
 
   public async obtenerProductos(): Promise<Producto[]> {
     try {

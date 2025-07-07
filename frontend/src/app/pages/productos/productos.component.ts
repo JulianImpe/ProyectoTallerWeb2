@@ -1,5 +1,5 @@
 import { Producto } from './../models/producto';
-import { Component, inject, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto/producto.service';
 
 import { TipoProducto } from '../../../enums/app.enums';
@@ -9,19 +9,20 @@ import { HeaderComponent } from '../header/header.component';
 import { UserService } from '../../services/user.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { CarritoService } from '../../services/carrito/carrito.service';import { Router } from '@angular/router';
-
+import { CarritoService } from '../../services/carrito/carrito.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
-  imports: [CurrencyPipe, FooterComponent, HeaderComponent],
+  imports: [CurrencyPipe, FooterComponent, HeaderComponent, ToastModule],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css',
 })
 export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
   tipoProductos = Object.values(TipoProducto);
-  router = inject(Router);  usuarioService = inject(UserService);
+  router = inject(Router);
+  usuarioService = inject(UserService);
   messageService = inject(MessageService);
   carritoService = inject(CarritoService);
 
@@ -40,23 +41,49 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  obtenerProductosPorTipoProducto(tipoProducto: TipoProducto): Producto[] {
-    // Actualiza el tipo de producto seleccionado
-
-    this.productoService.obtenerProductosPorTipoProducto(tipoProducto).subscribe({
+  obtenerProductosPorTipoProducto(tipoProducto: string) {
+  this.productoService
+    .obtenerProductosPorTipoProducto(tipoProducto as TipoProducto)
+    .subscribe({
       next: (data) => {
-        this.productos = data; // Actualiza la lista de productos filtrados por tipo
+        this.productos = data;
       },
       error: (error) => {
         console.error('Error al obtener los productos por tipo:', error);
-      }
-    }
-    );
-    return this.productos;
-  }
+      },
+    });
+}
 
   irAVerDetalleProducto(id: number) {
     this.router.navigate(['/ver-detalle-producto', id]);
   }
-
+  agregarProducto(producto: Producto) {
+    if (this.usuarioService.verificarSesion()) {
+      let response = this.carritoService.agregarProductoAlCarrito(producto);
+      response.subscribe({
+        next: (data) => {
+          console.log('Producto agregado al carrito:', data);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Agregado',
+            detail: `${producto.nombre} agregado al carrito`,
+          });
+        },
+        error: (error) => {
+          console.error('Error al agregar producto al carrito:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `No se pudo agregar ${producto.nombre}  al carrito.`,
+          });
+        },
+      });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Debes iniciar sesión para agregar productos al carrito.',
+      });
+    }
+  }
 }

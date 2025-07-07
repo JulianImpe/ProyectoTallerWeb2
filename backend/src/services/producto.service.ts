@@ -63,12 +63,12 @@ export class ProductoService {
   }
 
 
-  public async obtenerProductosPorTipoProducto(tipoProductoId: number): Promise<Producto[]> {
+  public async obtenerProductosPorTipoProducto(tipoProducto : string): Promise<Producto[]> {
     try {
       const listaProductosPorTipo = await this.prisma.producto.findMany({
         where: {
           tipoProducto: {
-            id: tipoProductoId
+            nombre: tipoProducto
           }
         }
       });

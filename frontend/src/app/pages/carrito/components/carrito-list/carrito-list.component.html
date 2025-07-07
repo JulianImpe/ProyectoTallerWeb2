@@ -1,26 +1,22 @@
 <p-toast></p-toast>
 
-<div class="max-w-4xl mx-auto p-4 bg-white rounded-2xl shadow-md mt-6">
-  <h1 class="text-2xl font-semibold mb-4 text-center font-italic">Carrito</h1>
+<div class="carrito-container">
+  <h1 class="carrito-title">Carrito</h1>
 
   @if(spinner){
-  <div class="flex justify-center items-center py-10">
+  <div class="spinner-container">
     <p-progressSpinner></p-progressSpinner>
   </div>
-  }@else if( !spinner && productos && productos.length === 0){
-  <p class="sin-productos text-gray-500 text-center">
-    No hay productos en el carrito.
-  </p>
-  } @else{
+  }
+  @else if( !spinner && productos && productos.length === 0){
+  <p class="sin-productos">No hay productos en el carrito.</p>
+  }
+  @else{
+  <div class="productos-carrito-container">
 
-  <div class="grid gap-4">
-    <div class="col-12 md:col-8">
-      <p-table
-        [value]="productos"
-        responsiveLayout="scroll"
-        class="tabla-carrito"
-      >
-        <ng-template pTemplate="header">
+    <div class="productos-container">
+      <table class="tabla-carrito">
+        <thead>
           <tr>
             <th>Producto</th>
             <th>Imagen</th>
@@ -29,14 +25,14 @@
             <th>Subtotal</th>
             <th>Eliminar</th>
           </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-item>
+        </thead>
+        <tbody>
+          @for(item of productos ; track item.id_item){
           <tr>
             <td>{{ item.nombre }}</td>
             <td>
               <img
-                [src]="item.imagen"
+                src="{{ item.imagen }}"
                 alt="{{ item.nombre }}"
                 class="img-producto"
               />
@@ -46,45 +42,45 @@
             <td>${{ item.precio * item.cantidad }}</td>
             <td>
               <button
-                pButton
-                icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-sm boton-eliminar"
                 (click)="eliminarProducto(item.id_item)"
                 aria-label="Eliminar producto"
                 title="Eliminar producto"
-              ></button>
+              >
+                <i class="pi pi-trash"></i>
+              </button>
             </td>
           </tr>
-        </ng-template>
-      </p-table>
+          }
+        </tbody>
+      </table>
     </div>
 
-    <div class="col-12 md:col-4">
-      <p-card header="Resumen de Compra" class="card-resumen">
+    <div class="resumen-container">
+      <div class="card-resumen">
+        <h2 class="resumen-title">Resumen de Compra</h2>
         <div class="total-carrito mb-3">Total: ${{ total }}</div>
         <div class="botones-resumen">
           <button
-            pButton
-            label="Finalizar Compra"
-            icon="pi pi-credit-card"
             class="p-button-success w-full mb-2 boton-comprar"
             aria-label="Finalizar Compra"
             title="Finalizar Compra"
-          ></button>
+          >
+            Finalizar Compra
+          </button>
 
           <button
-            pButton
-            label="Vaciar Carrito"
-            icon="pi pi-trash"
             class="p-button-danger w-full boton-vaciar"
             (click)="vaciarCarrito()"
             aria-label="Vaciar Carrito"
             title="Vaciar Carrito"
-          ></button>
+          >
+            Vaciar Carrito
+          </button>
         </div>
-      </p-card>
+      </div>
     </div>
-  </div>
 
+  </div>
   }
 </div>

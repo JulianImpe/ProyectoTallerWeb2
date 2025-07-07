@@ -6,22 +6,14 @@ import { Carrito } from '../../interfaces/carrito.interface';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { ItemCarrito } from '../../interfaces/item-carrito.interface';
 import { ToastModule } from 'primeng/toast';
-import { SkeletonModule } from 'primeng/skeleton';
-import { TableModule } from 'primeng/table';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-carrito-list',
   imports: [
     ProgressSpinner,
     ToastModule,
-    SkeletonModule,
-    TableModule,
-    ProgressSpinnerModule,
-    ButtonModule,
-    CardModule,
+    ProgressSpinnerModule
   ],
   templateUrl: './carrito-list.component.html',
   styleUrl: './carrito-list.component.css',

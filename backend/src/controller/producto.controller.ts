@@ -43,6 +43,16 @@ export class ProductoController {
             res.status(500).json({ error: "Internal server error" });
         }
     }
+    public obtenerProductoPorId = async(req: Request, res:Response) =>{
+        try { 
+            const { id } = req.params;
+            const productoBuscado = await this.productoService.obtenerProductoPorId(Number(id));
+        res.status(200).json(productoBuscado);
+        } catch (error) {
+                        console.error("Error al traer el producto por id", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
 
     public obtenerTiposDeProducto = async(req: Request, res: Response) => {
         try {

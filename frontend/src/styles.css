@@ -30,19 +30,21 @@ input {
     font-weight: 100;
     border-radius: 15px;
     padding: 1rem;
-    margin: 1rem;
     font-size: 1.1rem;
     border: solid 1px rgb(211, 226, 243);
+    background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px
 }
 
 button {
     vertical-align: middle;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
     padding: 12px;
     color: white;
     background-color: #EDBC53;
-        border-radius: 15px;
+    border-radius: 15px;
     margin: 0.5rem;
     border: none;
 }
@@ -52,4 +54,28 @@ button:hover {
     cursor: pointer;
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+    background: #ffdddd !important;
+    color: #a94442 !important;
+}
+
+
+.p-toast .p-toast-message.p-toast-message-success {
+    background: #135838 !important;
+    color: #adf0bd !important;
+    
+}
+
+
+.p-toast .p-toast-message.p-toast-message-warn {
+    background: #fff3cd !important;
+    color: #856404 !important;
+}
+
+
+.p-toast .p-toast-message.p-toast-message-info {
+    background: #d1ecf1 !important;
+    color: #0c5460 !important;
 }

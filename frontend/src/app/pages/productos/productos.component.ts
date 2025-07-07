@@ -4,23 +4,19 @@ import { ProductoService } from '../../services/producto/producto.service';
 import { TipoProducto } from '../../../enums/app.enums';
 import { FooterComponent } from "../../../../public/footer/footer.component";
 import { HeaderComponent } from "../../../../public/header/header.component";
-import { CurrencyPipe } from '@angular/common';
-import { UserService } from '../../services/user.service';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
-import { CarritoService } from '../../services/carrito/carrito.service';
 import { Router } from '@angular/router';
 import { ProductCardComponent } from "../product-card/product-card.component";
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-productos',
-  imports: [FooterComponent, HeaderComponent, ToastModule, ProductCardComponent, FormsModule],
-
+  imports: [FooterComponent, HeaderComponent, ProductCardComponent, FormsModule, ToastModule],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css',
+  styleUrl: './productos.component.css'
 })
+
 export class ProductosComponent implements OnInit {
   precioMinimo!: number;
   precioMaximo!: number;
@@ -31,13 +27,11 @@ export class ProductosComponent implements OnInit {
   obtenerPorNombre = new Subject<string>();
     obtenerPorDescripcion = new Subject<string>();
   // Me trae todos los valores del enum TipoProducto
-  usuarioService = inject(UserService);
-  messageService = inject(MessageService);
-  carritoService = inject(CarritoService);
-
-  // Me trae todos los valores del enum TipoProducto
   //tipoProducto: TipoProducto = TipoProducto.CAFE_EN_GRANOS; // Le pongo un valor por defecto
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService) {
+
+  }
+
 
   ngOnInit(): void {
     console.log('Los productos son: ', this.productos);
@@ -84,7 +78,7 @@ export class ProductosComponent implements OnInit {
 
     this.productoService.obtenerProductosPorTipoProducto(tipoProducto).subscribe({
       next: (data) => {
-        this.productos = data;
+        this.productos = data; // Actualiza la lista de productos filtrados por tipo
       },
       error: (error) => {
         console.error('Error al obtener los productos por tipo:', error);
@@ -131,34 +125,5 @@ export class ProductosComponent implements OnInit {
     }
     );
   }
-  agregarProducto(producto: Producto) {
-    if (this.usuarioService.verificarSesion()) {
-      let response = this.carritoService.agregarProductoAlCarrito(producto);
-      response.subscribe({
-        next: (data) => {
-          console.log('Producto agregado al carrito:', data);
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Agregado',
-            detail: `${producto.nombre} agregado al carrito`,
-          });
-        },
-        error: (error) => {
-          console.error('Error al agregar producto al carrito:', error);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `No se pudo agregar ${producto.nombre}  al carrito.`,
-          });
-        },
-      });
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Debes iniciar sesión para agregar productos al carrito.',
-      });
-    }
-  }
+  
 }
-

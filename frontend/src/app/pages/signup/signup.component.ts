@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UserService } from '../../services/user.service';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../../../../public/header/header.component';
+import { FooterComponent } from '../../../../public/footer/footer.component';
 import { ToastModule } from 'primeng/toast';
 import { RouterLink } from '@angular/router';
 

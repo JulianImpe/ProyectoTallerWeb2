@@ -2,13 +2,18 @@ img {
     width: 30%;
     height: 30%;
 }
-
+input{
+    margin: 1rem;
+    color: black;
+}
 .tipoProductos {
     padding: 1rem;
     text-decoration: none;
-    color: red;
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
 #titulo {
     display: flex;
     align-items: center;

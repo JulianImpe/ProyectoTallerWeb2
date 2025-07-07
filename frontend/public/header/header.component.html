@@ -9,10 +9,9 @@
             </h1>
         </a>
         <ul>
-            <li><a [routerLink]="'/home'">Café</a></li>
+            <li><a (click)="irHacia('/signup')">Registrate</a></li>
             <li><a (click)="irHacia('/productos')">Productos</a></li>
-            <li><a routerLink="/about">Más vendidos</a></li>
-            <li><a routerLink="/contact"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a (click)="irHacia('/carrito')"><i class="fa-solid fa-cart-shopping"></i></a></li>
             <li><a (click)="irHacia('/login')"><i class="fa-solid fa-user"></i></a></li>
         </ul>
     </nav>

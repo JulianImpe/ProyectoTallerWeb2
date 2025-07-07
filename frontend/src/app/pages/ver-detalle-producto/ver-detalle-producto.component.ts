@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto/producto.service';
-import id from '@angular/common/locales/id';
 import { Producto } from '../models/producto';
 import { CurrencyPipe } from '@angular/common';
-import { FooterComponent } from "../footer/footer.component";
-import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../../../../public/footer/footer.component";
+import { HeaderComponent } from "../../../../public/header/header.component";
 
 
 @Component({

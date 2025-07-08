@@ -10,11 +10,13 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { CredencialesLogin, UserService } from '../../services/user.service';
 import { Router, RouterLink} from '@angular/router';
+import { HeaderComponent } from '../../../../public/header/header.component';
+import { FooterComponent } from '../../../../public/footer/footer.component';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule, ToastModule, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, ToastModule, RouterLink, HeaderComponent, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -53,7 +55,8 @@ export class LoginComponent implements OnInit {
 
     this.usuarioService.iniciarSesion(credenciales).subscribe({
       next: (response) => {
-        localStorage.setItem('token', JSON.stringify(response));
+        let token = JSON.stringify(response).replace(/"/g, '');
+        localStorage.setItem('token', token);
         this.router.navigate(['/home']);
       },
       error: (error) => {

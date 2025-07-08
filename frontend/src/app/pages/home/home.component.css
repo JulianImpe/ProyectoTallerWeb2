@@ -1,6 +1,7 @@
-nav{
+nav {
     background-color: #59190200 !important;
 }
+
 h1,
 h2,
 h3 {
@@ -13,12 +14,15 @@ h1 {
     font-size: 3rem;
     padding: 1rem;
 }
-h2{
+
+h2 {
     font-size: 2.5rem;
-    color: #EDBC53;
 
 }
-p, a, button {
+
+p,
+a,
+button {
     font-family: "Karantina", sans-serif;
     font-weight: 100;
     font-style: light;
@@ -28,13 +32,15 @@ p, a, button {
     color: white;
     position: relative;
     width: 100%;
-    height: 100vh;/* Ajusta este valor según lo que quieras */
+    height: 100vh;
+    /* Ajusta este valor según lo que quieras */
     overflow: hidden;
 
 }
-.header-container a{
+
+.header-container a {
     text-decoration: none;
-        color: white;
+    color: white;
 }
 
 nav {
@@ -61,78 +67,87 @@ nav ul li {
     object-fit: cover;
     max-width: 100%;
     height: auto;
-    top: 0;
+    bottom: 0;
     left: 0;
     z-index: -1;
 }
-#texto-hero{
-    position:absolute;
-    top:60%;
-    left:80%;
-    transform: translate(-50%,-50%);
+
+#texto-hero {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    color:white;
+    color: white;
     gap: 1rem;
 }
-#texto-hero h2{
+
+#texto-hero h2 {
     font-size: 3.2rem;
 }
-#texto-hero p{
+
+#texto-hero p {
     font-size: 2.2rem;
 }
-#texto-hero button{
-    background-color:rgba(255, 255, 255, 0.086);
-    border: 3px solid white;
-    border-color: rgba(255, 255, 255, 0.463);
-    color:white;
-    padding: 1rem;
-    margin-top:1rem;
-    width: 100%;
+
+#texto-hero button {
+        border-radius: 15px;
+        width: 300px;
+    margin-top: 1rem;
     font-size: 2rem;
 }
 
-#texto-hero button:hover{
+#texto-hero button:hover {
     transform: scale(1.1);
-    transition: all 0.2s ease-in-out;;
+    transition: all 0.2s ease-in-out;
+    ;
 }
-#quienes_somos h2{
+video{
+    width: 400px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+#quienes_somos h2 {
     color: white;
 }
 
-#quienes_somos{
+#quienes_somos {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40%;
+    gap: 2rem;
+}
+
+#quienes_somos h2 {
+    color: black;
+}
+
+.quienes_somos-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 30%;
-}
-.quienes_somos-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;  
-}
-.quienes_somos-container p{
-    font-family: "Kaushan Script", cursive;
-    font-size: 2rem;
-    padding: 1rem;
-    background-color: #EDBC53;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    gap: 1rem;
 }
 
-#img-cafeteria{
-    max-width: 35%;
-    max-height: 30%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 1rem;
+.quienes_somos-container p {
+        vertical-align: middle;
+
+    font-size: 2rem;
 }
-#quienes_somos button{
-    background-color:#edbc5300(255, 255, 255, 0.086);
-    border: 3px solid #EDBC53(0, 0, 0);
-    border-color: #EDBC53(5, 5, 5, 0.463);
-    color:#EDBC53(0, 0, 0);
+
+#quienes_somos button {
     padding: 1rem;
     margin: 1rem;
-    width: 30%;
     font-size: 2rem;
+    border-radius: 15px;
+    width: 300px;
+}
+.resaltado{
+    color: #591902;
+    font-weight: bold;
 }

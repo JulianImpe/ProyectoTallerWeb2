@@ -1,8 +1,8 @@
-<app-header />
+<app-header></app-header>
 <p-toast />
 <div class="singup-container">
   <div class="form-container">
-    <h2 class="form-title">Registrate</h2>
+    <h1 class="form-title">Registrate</h1>
     <form [formGroup]="form" (ngSubmit)="registrarse()">
       <div class="form-group">
         <label for="nombre">NOMBRE</label>
@@ -37,6 +37,12 @@
         @if( form.get('contraseña')?.hasError('required') &&
         form.get('contraseña')?.touched ) {
         <small class="error-message">La contraseña es obligatoria.</small>
+        } @else if( form.get('contraseña')?.hasError('pattern') &&
+        form.get('contraseña')?.touched ) {
+        <small class="error-message">
+          La contraseña debe tener al menos 6 caracteres y al menos una letra
+          mayúscula.
+        </small>
         }
       </div>
       <div class="form-group">
@@ -48,9 +54,9 @@
         />
         @if( form.get('confirmarContraseña')?.hasError('required') &&
         form.get('confirmarContraseña')?.touched ) {
-        <small class="error-message"
-          >La confirmación de la contraseña es obligatoria.</small
-        >
+        <small class="error-message">
+          La confirmación de la contraseña es obligatoria.
+        </small>
         } @else if( form.get('confirmarContraseña')?.value !==
         form.get('contraseña')?.value &&
         form.get('confirmarContraseña')?.touched ) {
@@ -68,8 +74,8 @@
       <button type="submit" [disabled]="form.invalid">ENVIAR</button>
     </form>
     <div class="login-link-container">
-        <a class="login-link" routerLink="/login">YA TENGO CUENTA</a>
+      <a class="login-link" routerLink="/login">YA TENGO CUENTA</a>
     </div>
   </div>
 </div>
-<app-footer />
+<app-footer></app-footer>

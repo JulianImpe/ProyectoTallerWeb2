@@ -1,5 +1,5 @@
-<app-header></app-header>
 <p-toast />
+<app-header [transparente]="true"></app-header>
 <br>
 <div class="hero">
     <img id="imagen_hero" src="/assets/images/imagen-hero.jpg" alt="cafeteria">
@@ -7,25 +7,27 @@
         <h2>Desde 1998</h2>
         <p>brindandote el</p>
         <p>café de cada mañana.</p>
-        <button>Encontranos</button>
+        <button (click)="irHacia('/productos')">Encontrá lo que buscas</button>
     </div>
-    </div>
+</div>
 
 <section id="quienes_somos">
-<h2>Quienes somos</h2>
-<div class="quienes_somos-container">
-
-<p><i class="fa-solid fa-circle-dot"></i>Somos una marca de café que promueve la calidad y la variedad.
-    <br>
-    <br>
-    <i class="fa-solid fa-circle-dot"></i>Queremos que nuestros clientes disfruten de una experiencia única con cada taza de café que ofrecemos.
-    <br>
-    <br>
-    <i class="fa-solid fa-circle-dot"></i>Únete a nuestra comunidad y descubre el mundo del café como nunca antes lo habías hecho.
-</p>
-<img id="img-cafeteria" src="/assets/images/cafeteria.jpg" alt="cafeteria">
-</div>
-<button>Unirse</button>
+    <div class="quienes_somos-container">
+        <h2>Tomate un café y <span class="resaltado">registrate</span></h2>
+        <br>
+        <video src="/assets/images/cafeCaliente.mp4" autoplay loop></video>
+        
+        <br>
+        <button (click)="irHacia('/signup')"> Registrarse</button>
+    </div>
+        <div class="quienes_somos-container">
+            
+        <h2> O, si ya sos parte, <span class="resaltado">iniciá tu sesión</span></h2>
+        <br>
+        <video src="/assets/images/inicio_sesion_2.mp4" autoplay loop></video>
+        <br>
+        <button (click)="irHacia('/login')"> Unirse</button>
+    </div>
 </section>
 <br>
 <app-footer></app-footer>

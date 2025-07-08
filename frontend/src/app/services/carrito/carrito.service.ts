@@ -1,35 +1,54 @@
-import { Injectable } from '@angular/core';
-import { ProductoCarrito } from '../../pages/carrito/interfaces/producto-carrito.interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Producto } from '../../pages/models/producto';
+import { Carrito } from '../../pages/carrito/interfaces/carrito.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarritoService {
+  constructor() {}
 
-  constructor() { }
+  private apiUrl = 'http://localhost:3000/api/usuario';
+  http = inject(HttpClient);
 
-  getCarrito(): ProductoCarrito[]{
-    return JSON.parse(localStorage.getItem('carrito') || '[]');
+  agregarProductoAlCarrito(producto: Producto): Observable<any> {
+    const token = this.getToken();
+    if (!token) return of(null);
+
+    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
+    return this.http.post(`${this.apiUrl}/agregar-al-carrito`, producto, { headers });
   }
 
-  agregarProducto(producto:ProductoCarrito):void{
-    let carrito = this.getCarrito();
-    let productoExiste = carrito.find(item => item.id === producto.id);
-    if(productoExiste){
-      productoExiste.cantidad += producto.cantidad;
-    }else{
-      carrito.push(producto);
+  obtenerCarrito(): Observable<Carrito> {
+    const token = this.getToken();
+    if (!token) return of({ id: 0, id_usuario: 0, items: [] });
+
+    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
+    return this.http.get<Carrito>(`${this.apiUrl}/carrito`, { headers });
+  }
+
+  vaciarCarrito(): Observable<any> {
+    const token = this.getToken();
+    if (!token) return of(null);
+
+    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
+    return this.http.delete(`${this.apiUrl}/carrito`, { headers });
+  }
+
+  eliminarProductoDelCarrito(id: number): Observable<any> {
+    const token = this.getToken();
+    if (!token) return of(null);
+
+    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
+    return this.http.delete(`${this.apiUrl}/carrito/${id}`, { headers });
+  }
+
+  private getToken(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
     }
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-  }
-
-  eliminarProducto(id:number):void{
-    let carrito = this.getCarrito();
-    carrito = carrito.filter(item => item.id !== id);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-  }
-
-  limpiarCarrito():void{
-    localStorage.removeItem('carrito');
+    return null;
   }
 }

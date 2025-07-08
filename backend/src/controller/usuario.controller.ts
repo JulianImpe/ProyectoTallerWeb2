@@ -95,4 +95,120 @@ export class UsuarioController {
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
+  public validarToken = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ error: "Token es obligatorio o inválido" });
+        return;
+      } else {
+        const token = authHeader.split(" ")[1];
+
+        const user = await this.usuarioService.validarToken(token);
+        if (!user) res.status(401).json({ error: "Token inválido o expirado" });
+        else res.status(200).json(user);
+      }
+    } catch (error) {
+      console.error("Error al validar el token:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  public obtenerCarritoPorUsuarioId = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+         res
+          .status(401)
+          .json({ error: "Token es obligatorio o inválido" });
+          return;
+      } else {
+        const token = authHeader.split(" ")[1];
+        const carrito = await this.usuarioService.obtenerCarritoPorUsuarioId(
+          token
+        );
+        if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+        else res.status(200).json(carrito);
+      }
+    } catch (error) {
+      console.error("Error al obtener el carrito por usuario ID:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  public agregarAlCarrito = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res
+          .status(401)
+          .json({ error: "Token es obligatorio o inválido" });
+        return;
+      }
+
+      const token = authHeader.split(" ")[1];
+      const { id } = req.body;
+      if (!token || !id) {
+        res.status(400).json({ error: "Token y id de producto son obligatorios" });
+      }
+      const carrito = await this.usuarioService.agregarAlCarrito(
+        token,
+        id
+      );
+      if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+      else res.status(200).json(carrito);
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  public eliminarProductosDelCarrito = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ error: "Token es obligatorio o inválido" });
+        return;
+      }
+
+      const token = authHeader.split(" ")[1];
+      const carrito = await this.usuarioService.eliminarProductosDelCarrito(token);
+      if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+      else res.status(200).json(carrito);
+    } catch (error) {
+      console.error("Error al eliminar productos del carrito:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  public eliminarProductoDelCarritoPorId = async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers["authorization"];
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ error: "Token es obligatorio o inválido" });
+        return;
+      }
+
+      const token = authHeader.split(" ")[1];
+      const { id } = req.params;
+      if (!token || !id) {
+        res.status(400).json({ error: "Token y id de producto son obligatorios" });
+      }
+      const carrito = await this.usuarioService.eliminarProductoDelCarritoPorId(
+        token,
+        Number(id)
+      );
+      if (!carrito) res.status(404).json({ error: "Carrito no encontrado" });
+      else res.status(200).json(carrito);
+    } catch (error) {
+      console.error("Error al eliminar producto del carrito por ID:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
 }

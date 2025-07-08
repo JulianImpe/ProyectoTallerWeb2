@@ -1,1 +1,86 @@
-<p>carrito-list works!</p>
+<p-toast></p-toast>
+
+<div class="carrito-container">
+  <h1 class="carrito-title">Carrito</h1>
+
+  @if(spinner){
+  <div class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  }
+  @else if( !spinner && productos && productos.length === 0){
+  <p class="sin-productos">No hay productos en el carrito.</p>
+  }
+  @else{
+  <div class="productos-carrito-container">
+
+    <div class="productos-container">
+      <table class="tabla-carrito">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Imagen</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(item of productos ; track item.id_item){
+          <tr>
+            <td>{{ item.nombre }}</td>
+            <td>
+              <img
+                src="{{ item.imagen }}"
+                alt="{{ item.nombre }}"
+                class="img-producto"
+              />
+            </td>
+            <td>{{ item.cantidad }}</td>
+            <td>${{ item.precio }}</td>
+            <td>${{ item.precio * item.cantidad }}</td>
+            <td>
+              <button
+                class="p-button-rounded p-button-danger p-button-sm boton-eliminar"
+                (click)="eliminarProducto(item.id_item)"
+                aria-label="Eliminar producto"
+                title="Eliminar producto"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="resumen-container">
+      <div class="card-resumen">
+        <h2 class="resumen-title">Resumen de Compra</h2>
+        <div class="total-carrito mb-3">Total: ${{ total }}</div>
+        <div class="botones-resumen">
+          <button
+            class="p-button-success w-full mb-2 boton-comprar"
+            aria-label="Finalizar Compra"
+            title="Finalizar Compra"
+          >
+            Finalizar Compra
+          </button>
+
+          <button
+            class="p-button-danger w-full boton-vaciar"
+            (click)="vaciarCarrito()"
+            aria-label="Vaciar Carrito"
+            title="Vaciar Carrito"
+          >
+            Vaciar Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  }
+</div>

@@ -18,7 +18,7 @@
 
 .form-container {
   border-radius: 10px;
-  padding: 1rem;
+  padding: 2rem;
   width: 90%;
   max-width: 450px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,7 +29,6 @@
 .form-title {
   margin-bottom: 1.5rem;
   text-align: center;
-  font-family: "Karantina", sans-serif;
 }
 
 .form-container label {
@@ -46,27 +45,24 @@
 
 .form-group input {
   width: 100%;
-  border: none;
-  border-bottom: 1px solid #59190296;
-  background-color: #eeeeee;
+  padding: 0.5rem;
   color: black;
 }
 
 .form-group input:focus {
   outline: none;
-  border-bottom: 2px solid #220a01;
+  border: 2px solid #220a01;
 }
 
 .form-container button {
   width: 100%;
   padding: 0.5rem;
-  background-color: #59190296;
   color: rgb(27, 27, 27);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 10px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: "Karantina", sans-serif;
   letter-spacing: 1.5px;
 }
@@ -79,7 +75,7 @@
 
 .error-message{
   color: rgba(255, 0, 0, 0.507);
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-family: "Karantina", sans-serif;
   text-align: center;
 }

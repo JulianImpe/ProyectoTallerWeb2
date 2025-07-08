@@ -9,15 +9,21 @@ import {
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserService } from '../../services/user.service';
-import { Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../../../public/header/header.component';
 import { FooterComponent } from '../../../../public/footer/footer.component';
 import { CredencialesLogin } from './interfaces/credenciales-login.interface';
 
-
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule, ToastModule, RouterLink, HeaderComponent, FooterComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ToastModule,
+    RouterLink,
+    HeaderComponent,
+    FooterComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -27,7 +33,6 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
 
   private fb = inject(FormBuilder);
-
   messageService = inject(MessageService);
   usuarioService = inject(UserService);
   router = inject(Router);
@@ -56,8 +61,10 @@ export class LoginComponent implements OnInit {
 
     this.usuarioService.iniciarSesion(credenciales).subscribe({
       next: (response) => {
-        let token = JSON.stringify(response).replace(/"/g, '');
-        localStorage.setItem('token', token);
+        if (typeof window !== 'undefined') {
+          let token = JSON.stringify(response).replace(/"/g, '');
+          localStorage.setItem('token', token);
+        }
         this.router.navigate(['/home']);
       },
       error: (error) => {

@@ -6,6 +6,7 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import { HomeComponent } from './pages/home/home.component';
 import { VerDetalleProductoComponent } from './pages/ver-detalle-producto/ver-detalle-producto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
 
 //Podemos cargar todas las rutas en este solo archivo o hacer un routing
 // para cada componente
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path:'home', component:HomeComponent},
     {path:'ver-detalle-producto/:id',component:VerDetalleProductoComponent},
     {path: 'carrito', component:CarritoComponent},
+    {path: 'recuperar', component:RecuperarContrasenaComponent},
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'**',redirectTo:'home'}
 ];

@@ -1,19 +1,34 @@
 <header>
-    <nav [class]="{'nav-transparente': transparente}">
+    <nav [class]="{ 'nav-transparente': transparente }">
         <a (click)="irHacia('/home')">
             <h1>
                 Café
-                <div id="teria">Teria</div>
+                <div id="teria">Tería</div>
             </h1>
         </a>
+
+        @if(estaLogueado) {
         <ul>
-            @if (userService.esAdmin) {
+            @if (userService.EsAdmin()) {
             <li><a (click)="irHacia('/admin/productos')">Administrar productos</a></li>
             }
+            <li><a (click)="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+
+            <li>
+                <a (click)="irHacia('/carrito')"><i class="fa-solid fa-cart-shopping"></i></a>
+            </li>
+            <li>
+                <a (click)="irHacia('/login')"><i class="fa-solid fa-user"></i></a>
+            </li>
+        </ul>
+        }@else{
+        <ul>
             <li><a (click)="irHacia('/signup')">Registrate</a></li>
             <li><a (click)="irHacia('/productos')">Productos</a></li>
-            <li><a (click)="irHacia('/carrito')"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li><a (click)="irHacia('/login')"><i class="fa-solid fa-user"></i></a></li>
+            <li>
+                <a (click)="irHacia('/login')"><i class="fa-solid fa-user"></i></a>
+            </li>
         </ul>
+        }
     </nav>
 </header>

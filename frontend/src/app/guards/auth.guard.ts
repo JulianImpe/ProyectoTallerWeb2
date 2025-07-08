@@ -7,9 +7,9 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
 
   const estaLogeado = userService.EstaLogeado();
-  const esAdmin = userService.esAdmin;
+  const EsAdmin = userService.EsAdmin;
 
-  if (estaLogeado && esAdmin) {
+  if (estaLogeado && EsAdmin()) {
     return true;
   } else {
     const router = inject(Router);

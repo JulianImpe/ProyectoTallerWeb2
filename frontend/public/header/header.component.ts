@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,13 +9,23 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   router = inject(Router);
   @Input() transparente: boolean = false;
-  ngOnInit() {
-  }
+
   irHacia(ruta:string) {
     this.router.navigate([ruta]);
+  }
+
+  estaLogueado: boolean = false;
+
+  ngOnInit() {
+    this.estaLogueado = localStorage.getItem('token') ? true : false;
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem('token');
+    this.estaLogueado = false;
   }
 }
 

@@ -41,19 +41,18 @@ export class ProductoController {
             res.status(500).json({ error: "Internal server error" });
         }
     };
-    /*
+    
     public obtenerProductosPorTipoProducto = async (req: Request, res: Response) => {
         try {
-            const { tipoProducto } = req.params;
-            const listaProductosPorTipo = await this.productoService.obtenerProductosPorTipoProducto(tipoProducto as TipoProducto);
+            const { tipoProducto } = req.body;
+            const listaProductosPorTipo = await this.productoService.obtenerProductosPorTipoProducto(tipoProducto);
             res.status(200).json(listaProductosPorTipo);
         } catch (error) {
             console.error("Error al traer los productos por tipo:", error);
             res.status(500).json({ error: "Internal server error" });
         }
     }
-]
-    */
+
     public obtenerProductoPorId = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;

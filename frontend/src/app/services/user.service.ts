@@ -2,11 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { UsuarioRegistro } from '../pages/signup/interfaces/usuario-registro.interface';
+import { CredencialesLogin } from '../pages/login/interfaces/credenciales-login.interface';
+import { RecuperarContrasena } from './../pages/recuperar-contrasena/interfaces/recuperar-contrasena.interface';
 
-export interface CredencialesLogin {
-  email: string;
-  contraseña: string;
-}
+
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +42,13 @@ export class UserService {
     );
 
     return data ? true : false;
+  }
+
+  recuperarContrasena(credenciales: RecuperarContrasena) {
+    return this.http.post(`${this._url}/actualizar`, credenciales).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 }

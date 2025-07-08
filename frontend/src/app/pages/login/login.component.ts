@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { CredencialesLogin, UserService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router, RouterLink} from '@angular/router';
 import { HeaderComponent } from '../../../../public/header/header.component';
 import { FooterComponent } from '../../../../public/footer/footer.component';
+import { CredencialesLogin } from './interfaces/credenciales-login.interface';
 
 
 @Component({

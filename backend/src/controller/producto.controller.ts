@@ -68,12 +68,14 @@ export class ProductoController {
     public obtenerTiposDeProducto = async (req: Request, res: Response) => {
         try {
             const tipos = await this.productoService.obtenerTiposDeProducto();
+            console.log('Tipos obtenidos:', tipos);
             res.status(200).json(tipos);
         } catch (error) {
             console.error("Error al obtener los tipos de producto:", error);
             res.status(500).json({ error: "Internal server error" });
         }
     };
+
     public obtenerProductosPorNombre = async (req: Request, res: Response) => {
         try {
             const { nombre } = req.params;
@@ -142,4 +144,5 @@ export class ProductoController {
             console.error("Error deleting product by ID:", error);
             res.status(500).json({ error: "Internal server error" });
         }
-    }}
+    }
+}

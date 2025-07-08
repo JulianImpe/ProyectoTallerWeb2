@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   router = inject(Router);
+  userService = inject(UserService);
   @Input() transparente: boolean = false;
   ngOnInit() {
   }

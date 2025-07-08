@@ -4,8 +4,8 @@ import { TipoProducto } from "../../generated/prisma";//Nos traemos el tipo de p
 
 
 export class ProductoService {
-    private prisma = new PrismaClient();
-  public async obtenerProductosPorNombre(nombre: string) : Promise<Producto[]> {
+  private prisma = new PrismaClient();
+  public async obtenerProductosPorNombre(nombre: string): Promise<Producto[]> {
     try {
       const productos = await this.prisma.producto.findMany({
         where: {
@@ -20,8 +20,8 @@ export class ProductoService {
       throw new Error("Internal server error");
     }
   }
-  
-  public async obtenerProductosPorDescripcion(descripcion: string) : Promise<Producto[]> {
+
+  public async obtenerProductosPorDescripcion(descripcion: string): Promise<Producto[]> {
     try {
       const productos = await this.prisma.producto.findMany({
         where: {
@@ -36,8 +36,9 @@ export class ProductoService {
       throw new Error("Internal server error");
     }
   }
-  public async obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number) : Promise<Producto[]> {
+  public async obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number): Promise<Producto[]> {
     try {
+      console.log("Buscando productos con precio entre:", precioMinimo, "y", precioMaximo);
       const productos = await this.prisma.producto.findMany({
         where: {
           precio: {
@@ -52,21 +53,21 @@ export class ProductoService {
       throw new Error("Internal server error");
     }
   }
-public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
-  try {
-    const productos = await this.prisma.producto.findMany({
-      where: {
-        stock: {
-          equals: stock,
+  public async obtenerProductosPorStock(stock: number): Promise<Producto[]> {
+    try {
+      const productos = await this.prisma.producto.findMany({
+        where: {
+          stock: {
+            equals: stock,
+          },
         },
-      },
-    });
-    return productos;
-  } catch (error) {
-    console.error("Error al encontrar productos por stock:", error);
-    throw new Error("Internal server error");
+      });
+      return productos;
+    } catch (error) {
+      console.error("Error al encontrar productos por stock:", error);
+      throw new Error("Internal server error");
+    }
   }
-}
 
   public async obtenerProductos(): Promise<Producto[]> {
     try {
@@ -77,24 +78,6 @@ public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
       throw new Error("Internal server error");
     }
   }
-
-  public async obtenerProductoPorId(id:number): Promise<Producto> {
-    try {
-      const productoEncontrado = await this.prisma.producto.findUnique({
-        where: {
-          id:id
-        }
-      });
-      if (!productoEncontrado) {
-        throw new Error("Producto no encontrado");
-      }
-      return productoEncontrado;
-    } catch (error) {
-      console.error("Error no se encontro el producto por id:", error);
-      throw new Error("Internal server error");
-    }
-  }
-
   public async crearProducto(producto: ProductoDTO): Promise<Producto> {
     try {
       const tipo = await this.prisma.tipoProducto.findUnique({
@@ -125,7 +108,7 @@ public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
   }
 
 
-  public async obtenerProductosPorTipoProducto(tipoProducto : string): Promise<Producto[]> {
+  public async obtenerProductosPorTipoProducto(tipoProducto: string): Promise<Producto[]> {
     try {
       const listaProductosPorTipo = await this.prisma.producto.findMany({
         where: {
@@ -141,7 +124,7 @@ public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
     }
   }
 
-  public async obtenerTiposDeProducto(){
+  public async obtenerTiposDeProducto() {
     try {
       const tipos = await this.prisma.tipoProducto.findMany({});
       return tipos;
@@ -191,14 +174,22 @@ public async obtenerProductosPorStock(stock: number) : Promise<Producto[]> {
   public async eliminarProductoPorId(id: number): Promise<Producto> {
     try {
       const deletedProduct = await this.prisma.producto.delete({
-        where: { id },
+        where: { id }
       });
       return deletedProduct;
-    } catch (error) {
-      console.error("Error deleting product by ID:", error);
-      throw new Error("Internal server error");
+    } catch (error: any) {
+      console.error('Error deleting product by ID:', error);
+
+      if (error.code === 'P2003') {
+        throw new Error(
+          'No se pudo eliminar el producto porque se encuentra en el carrito de algún usuario.'
+        );
+      }
+
+      throw new Error('Internal server error');
     }
   }
+
 }
 
 

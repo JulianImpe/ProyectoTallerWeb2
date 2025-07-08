@@ -78,6 +78,7 @@ export class UsuarioService {
         return await createToken({
           id: user.id,
           email: user.email,
+          rol: user.rol,
         } as DatosEncriptados);
       } else return null;
     } catch (error) {

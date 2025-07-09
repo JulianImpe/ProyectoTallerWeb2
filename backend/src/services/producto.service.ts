@@ -38,7 +38,6 @@ export class ProductoService {
   }
   public async obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number): Promise<Producto[]> {
     try {
-      console.log("Buscando productos con precio entre:", precioMinimo, "y", precioMaximo);
       const productos = await this.prisma.producto.findMany({
         where: {
           precio: {

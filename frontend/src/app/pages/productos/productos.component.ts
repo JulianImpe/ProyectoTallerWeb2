@@ -34,7 +34,6 @@ export class ProductosComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log('Los productos son: ', this.productos);
     this.productoService.obtenerProductos().subscribe({
       next: (data) => {
         this.productos = data;//Le decimos al obtener productos que se compare con la data para reemplazar su valor.
@@ -91,13 +90,13 @@ export class ProductosComponent implements OnInit {
   obtenerProductosPorNombre(event: Event): void {
   const input = event.target as HTMLInputElement;
   const nombre = input.value;
-  this.obtenerPorNombre.next(nombre); 
+  this.obtenerPorNombre.next(nombre);
   }
 
   obtenerProductosPorDescripcion(event: Event): void {
     const inputDesc = event.target as HTMLInputElement;
     const descripcion = inputDesc.value;
-  this.obtenerPorDescripcion.next(descripcion); 
+  this.obtenerPorDescripcion.next(descripcion);
   }
 
 
@@ -125,5 +124,5 @@ export class ProductosComponent implements OnInit {
     }
     );
   }
-  
+
 }

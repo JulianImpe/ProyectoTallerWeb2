@@ -30,21 +30,19 @@ ngOnInit(): void {
 const id = this.router?.snapshot.paramMap.get('id');//Capturo el id en el momento que se carga el componente
 if(id){
   this.productoService.irAVerDetalleProducto(Number(id)).subscribe({
-    
+
     next: (data)=> this.producto = data,
         error: (error) => {
         console.error('Error al obtener el producto:', error);
       }
   })
 }
-console.log(this.producto);
 }
 agregarProducto(producto: Producto) {
     if (this.usuarioService.verificarSesion()) {
       let response = this.carritoService.agregarProductoAlCarrito(producto);
       response.subscribe({
         next: (data) => {
-          console.log('Producto agregado al carrito:', data);
           this.messageService.add({
             severity: 'success',
             summary: 'Agregado',

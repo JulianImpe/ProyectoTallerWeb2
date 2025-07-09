@@ -19,7 +19,7 @@
 
       <li>
         <a (click)="cerrarSesion()">
-          <!-- <i class="fa-solid fa-right-from-bracket"></i -->
+          <i class="fa-solid fa-right-from-bracket"></i >
           Cerrar sesión
         </a>
       </li>
@@ -29,11 +29,12 @@
     </ul>
     }@else{
     <ul>
-      <li><a (click)="irHacia('/productos')">Productos</a></li>
-      <li> <a (click)="irHacia('/login')">Ingresar</a></li>
+      <li><a (click)="irHacia('/productos')"> <i class="fa-solid fa-boxes-stacked"></i>Productos</a></li>
+      <li> <a (click)="irHacia('/login')"> <i class="fa-solid fa-user"></i>  Ingresar</a></li>
+      
       <li>
         <a (click)="irHacia('/signup')">
-          <!-- <i class="fa-solid fa-user"></i> -->
+          <i class="fa-solid fa-user-plus"></i>
           Registrarse
         </a>
       </li>

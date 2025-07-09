@@ -67,3 +67,9 @@ nav ul li {
   list-style: none;
   margin: 0 1rem;
 }
+i{
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+

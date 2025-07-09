@@ -31,7 +31,6 @@ export class ProductCardComponent {
       let response = this.carritoService.agregarProductoAlCarrito(producto);
       response.subscribe({
         next: (data) => {
-          console.log('Producto agregado al carrito:', data);
           this.messageService.add({
             severity: 'success',
             summary: 'Agregado',

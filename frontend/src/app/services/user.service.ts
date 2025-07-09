@@ -14,7 +14,7 @@ export class UserService {
   private _url = 'http://localhost:3000/api/usuario';
 
   http = inject(HttpClient);
-  constructor() {}
+  constructor() { }
   iniciarSesion(credenciales: CredencialesLogin) {
     return this.http.post(`${this._url}/login`, credenciales).pipe(
       map((response) => {
@@ -59,6 +59,32 @@ export class UserService {
     })
   );
 }
+
+  EstaLogeado(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      // Podés agregar verificación extra aquí, ej. expiración del token
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  EsAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload?.rol === 'admin';
+    } catch (e) {
+      return false;
+    }
+  }
+
 
   recuperarContrasena(credenciales: RecuperarContrasena) {
     return this.http.post(`${this._url}/actualizar`, credenciales).pipe(

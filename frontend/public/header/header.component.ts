@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   router = inject(Router);
+  userService = inject(UserService);
   @Input() transparente: boolean = false;
 
   estaLogueado: boolean = false;

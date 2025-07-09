@@ -1,9 +1,0 @@
-<h2>Lista de usuarios</h2>
-<button (click)="toggleMostrar()">
-    {{ mostrar ? 'Ocultar' : 'Mostrar'}} usuarios
-</button>
-<ul *ngIf="mostrar">
-    <li *ngFor="let user of usuarios">
-{{user.nombre | uppercase}} {{user.apellido}} - {{user.email}}
-    </li>
-</ul>

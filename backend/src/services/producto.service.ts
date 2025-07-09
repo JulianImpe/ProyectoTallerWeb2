@@ -1,7 +1,6 @@
 import { PrismaClient, Producto } from "../../generated/prisma";
 import { ProductoDTO } from "../dtos/producto.dto";
-import { TipoProducto } from "../../generated/prisma";//Nos traemos el tipo de producto desde prisma, ya que es un enum generado por Prisma.
-
+import { TipoProducto } from "../../generated/prisma"; //Nos traemos el tipo de producto desde prisma, ya que es un enum generado por Prisma.
 
 export class ProductoService {
   private prisma = new PrismaClient();
@@ -21,7 +20,9 @@ export class ProductoService {
     }
   }
 
-  public async obtenerProductosPorDescripcion(descripcion: string): Promise<Producto[]> {
+  public async obtenerProductosPorDescripcion(
+    descripcion: string
+  ): Promise<Producto[]> {
     try {
       const productos = await this.prisma.producto.findMany({
         where: {
@@ -36,13 +37,16 @@ export class ProductoService {
       throw new Error("Internal server error");
     }
   }
-  public async obtenerProductosPorRangoPrecio(precioMinimo: number, precioMaximo: number): Promise<Producto[]> {
+  public async obtenerProductosPorRangoPrecio(
+    precioMinimo: number,
+    precioMaximo: number
+  ): Promise<Producto[]> {
     try {
       const productos = await this.prisma.producto.findMany({
         where: {
           precio: {
-            gte: precioMinimo,//Mayor que o igual
-            lte: precioMaximo,//Menor que o igual
+            gte: precioMinimo, //Mayor que o igual
+            lte: precioMaximo, //Menor que o igual
           },
         },
       });
@@ -106,15 +110,16 @@ export class ProductoService {
     }
   }
 
-
-  public async obtenerProductosPorTipoProducto(tipoProducto: string): Promise<Producto[]> {
+  public async obtenerProductosPorTipoProducto(
+    tipoProducto: string
+  ): Promise<Producto[]> {
     try {
       const listaProductosPorTipo = await this.prisma.producto.findMany({
         where: {
           tipoProducto: {
-            nombre: tipoProducto
-          }
-        }
+            nombre: tipoProducto,
+          },
+        },
       });
       return listaProductosPorTipo;
     } catch (error) {
@@ -145,7 +150,10 @@ export class ProductoService {
     }
   }
 
-  public async actualizarProductoPorId(id: number, producto: ProductoDTO): Promise<Producto> {
+  public async actualizarProductoPorId(
+    id: number,
+    producto: ProductoDTO
+  ): Promise<Producto> {
     try {
       const updatedProduct = await this.prisma.producto.update({
         where: { id },
@@ -173,22 +181,19 @@ export class ProductoService {
   public async eliminarProductoPorId(id: number): Promise<Producto> {
     try {
       const deletedProduct = await this.prisma.producto.delete({
-        where: { id }
+        where: { id },
       });
       return deletedProduct;
     } catch (error: any) {
-      console.error('Error deleting product by ID:', error);
+      console.error("Error deleting product by ID:", error);
 
-      if (error.code === 'P2003') {
+      if (error.code === "P2003") {
         throw new Error(
-          'No se pudo eliminar el producto porque se encuentra en el carrito de algún usuario.'
+          "No se pudo eliminar el producto porque se encuentra en el carrito de algún usuario."
         );
       }
 
-      throw new Error('Internal server error');
+      throw new Error("Internal server error");
     }
   }
-
 }
-
-

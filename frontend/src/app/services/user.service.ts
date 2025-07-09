@@ -31,18 +31,35 @@ export class UserService {
     );
   }
 
-  verificarSesion(): boolean {
-    const token = localStorage.getItem('token');
-    const response = this.http.post(`${this._url}/validar-token`, { token });
-
-    const data = response.pipe(
-      map((response) => {
-        return response;
-      })
-    );
-
-    return data ? true : false;
+  verificarSesion() {
+  if (typeof window === 'undefined') {
+    return this.http.post(`${this._url}/validar-token`, {}, {
+      headers: { Authorization: '' }
+    }).pipe(map(() => false));
   }
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return this.http.post(`${this._url}/validar-token`, {}, {
+      headers: { Authorization: '' }
+    }).pipe(map(() => false));
+  }
+
+  return this.http.post(
+    `${this._url}/validar-token`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  ).pipe(
+    map((response: any) => {
+      return !!response?.id;
+    })
+  );
+}
+
   EstaLogeado(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
@@ -67,6 +84,7 @@ export class UserService {
       return false;
     }
   }
+
 
   recuperarContrasena(credenciales: RecuperarContrasena) {
     return this.http.post(`${this._url}/actualizar`, credenciales).pipe(
